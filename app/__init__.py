@@ -69,7 +69,4 @@ def create_app(config_name):
     from .plateforme import plateforme as plateforme_blueprint
     app.register_blueprint(plateforme_blueprint)
 
-    from .hos import hos as hos_blueprint
-    app.register_blueprint(hos_blueprint)
-
     return app

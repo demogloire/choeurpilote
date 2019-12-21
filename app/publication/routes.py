@@ -23,27 +23,76 @@ def ajouterpub():
       #Titre de slug
       titre_slugify = Slugify(to_lower=True) #Slug
       titre=titre_slugify(form.titre.data)
+      #Les variables vide
+      pdf_download=None
+      img_download=None
+
       #gestion des documents transmis
-      if form.document_pu.data:
+      if form.document_pu.data and form.document_img.data:
+         file_to_upload=form.document_pu.data
+         img_file_to_upload=form.document_img.data
+
+         if file_to_upload:
+            try:
+               upload_result = upload(file_to_upload)
+            except:
+               flash("Erreur de connexion",'danger')
+
+         if img_file_to_upload:
+            try:
+               img_upload_result = upload(img_file_to_upload)
+            except:
+               flash("Erreur de connexion",'danger')
+
+         pdf_download=upload_result['url'] # Mise en route du fichier pdf
+         img_download=img_upload_result['url'] # Mise en route du fichier pdf
+
+         save_publication=Article(titre=form.titre.data.capitalize(), imagesurl=img_download, slug=titre, resume=form.resume.data, document_pdf=pdf_download, categorie_id=form.cate_pub.data.id, user_article=current_user)
+         db.session.add(save_publication)
+         db.session.commit()
+         flash("Ajout de la publication avec succès",'succes')
+         return redirect(url_for('publication.lipub'))
+
+      elif form.document_pu.data:
          file_to_upload=form.document_pu.data
          if file_to_upload:
             try:
                upload_result = upload(file_to_upload)
             except:
                flash("Erreur de connexion",'danger')
+
          pdf_download=upload_result['url'] # Mise en route du fichier pdf
-         save_publication=Article(titre=form.titre.data.capitalize(), slug=titre, resume=form.resume.data, document_pu=pdf_download, categorie_id=form.cate_pub.data.id, user_id=current_user)
+         
+         save_publication=Article(titre=form.titre.data.capitalize(), slug=titre, resume=form.resume.data, document_pdf=pdf_download, categorie_id=form.cate_pub.data.id, user_article=current_user)
          db.session.add(save_publication)
          db.session.commit()
          flash("Ajout de la publication avec succès",'succes')
          return redirect(url_for('publication.lipub'))
-      save_publication=Article(titre=form.titre.data.capitalize(), slug=titre, resume=form.resume.data, 
+
+      elif form.document_img.data:
+         img_file_to_upload=form.document_img.data
+
+         if img_file_to_upload:
+            try:
+               img_upload_result = upload(img_file_to_upload)
+            except:
+               flash("Erreur de connexion",'danger')
+
+         img_download=img_upload_result['url'] # Mise en route du fichier pdf
+
+         save_publication=Article(titre=form.titre.data.capitalize(), imagesurl=img_download, slug=titre, resume=form.resume.data, categorie_id=form.cate_pub.data.id, user_article=current_user)
+         db.session.add(save_publication)
+         db.session.commit()
+         flash("Ajout de la publication avec succès",'succes')
+         return redirect(url_for('publication.lipub'))
+      else:
+         save_publication=Article(titre=form.titre.data.capitalize(), slug=titre, resume=form.resume.data, 
                               categorie_id=form.cate_pub.data.id, user_article=current_user)
-      db.session.add(save_publication)
-      db.session.commit()
-      flash("Ajout de la publication avec succès",'succes')
-      return redirect(url_for('publication.lipub'))
-      
+         db.session.add(save_publication)
+         db.session.commit()
+         flash("Ajout de la publication avec succès",'succes')
+         return redirect(url_for('publication.lipub'))
+
    return render_template('publication/ajpub.html', form=form, title=title)
 
 """ énumeration des publication  """
@@ -108,7 +157,27 @@ def editpub(pub_id):
       titre_slugify = Slugify(to_lower=True) #Slug
       titre=titre_slugify(form.ed_titre.data)
       #gestion des documents transmis
-      if form.ed_document_pu.data:
+      if form.ed_document_pu.data and form.ed_document_img.data :
+         file_to_upload=form.ed_document_pu.data
+         img_file_to_upload=form.ed_document_img.data
+
+         if file_to_upload:
+            try:
+               upload_result = upload(file_to_upload)
+            except:
+               flash("Erreur de connexion",'danger')
+                  
+         if img_file_to_upload:
+            try:
+               img_upload_result = upload(file_to_upload)
+            except:
+               flash("Erreur de connexion",'danger')
+         pdf_download=upload_result['url'] # Mise en route du fichier pdf
+         img_download=img_upload_result['url'] # Mise en route du fichier img
+         pub_class.document_pdf=pdf_download
+         pub_class.imagesurl=img_download
+
+      elif form.ed_document_pu.data :
          file_to_upload=form.ed_document_pu.data
          if file_to_upload:
             try:
@@ -117,14 +186,18 @@ def editpub(pub_id):
                flash("Erreur de connexion",'danger')
          pdf_download=upload_result['url'] # Mise en route du fichier pdf
          pub_class.document_pdf=pdf_download
-         pub_class.titre=form.ed_titre.data.capitalize()
-         pub_class.slug=titre
-         pub_class.resume=form.ed_resume.data
-         pub_class.categorie_id=form.ed_cate_pub.data.id
-         db.session.commit()
-         flash("Modification réussie",'success')
-         return redirect(url_for('publication.lipub'))
-      #Modification des données
+      
+      elif form.ed_document_img.data :
+         img_file_to_upload=form.ed_document_img.data
+         
+         if img_file_to_upload:
+            try:
+               img_upload_result = upload(file_to_upload)
+            except:
+               flash("Erreur de connexion",'danger')
+         img_download=img_upload_result['url'] # Mise en route du fichier img
+         pub_class.imagesurl=img_download
+
       pub_class.titre=form.ed_titre.data.capitalize()
       pub_class.slug=titre
       pub_class.resume=form.ed_resume.data

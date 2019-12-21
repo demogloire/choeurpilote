@@ -16,8 +16,6 @@ class AjouteruserForm(FlaskForm):
     username= StringField('Email', validators=[DataRequired('Veuillez completer votre email'), Email('Votre email est incorrect')])
     password= PasswordField('Mot de passe', validators=[DataRequired('Veuillez completer votre mot de passe')])
     role= SelectField('Rôle',choices=[('Admin', 'Admin'), ('Webmaster', 'Webmaster')])
-    domaine= SelectField('Domaine',choices=[('Agriculture', 'Agriculture'), ('Santé', 'Santé')])
-    organisation= StringField('Organisation', validators=[DataRequired("Nom de l'organisation"),  Length(min=2, max=32, message="Veuillez respecté les caractères")])
     submit = SubmitField('Créer compte')
 
     #Fornction de verification d'unique existenace dans la base des données
@@ -32,9 +30,6 @@ class EditeruserForm(FlaskForm):
     ed_prenom= StringField('Prénom', validators=[DataRequired("Completer nom"),  Length(min=4, max=32, message="Veuillez respecté les caractères")])
     ed_username= StringField('Email', validators=[DataRequired('Veuillez completer votre email'), Email('Votre email est incorrect')])
     ed_role= SelectField('Rôle',choices=[('Admin', 'Admin'), ('Webmaster', 'Webmaster')])
-    ed_domaine= SelectField('Domaine',choices=[('Agriculture', 'Agriculture'), ('Santé', 'Santé')])
-    ed_organisation= StringField('Organisation', validators=[DataRequired("Nom de l'organisation"),  Length(min=2, max=32, message="Veuillez respecté les caractères")])
-
     ed_submit = SubmitField('Créer compte')
 
 

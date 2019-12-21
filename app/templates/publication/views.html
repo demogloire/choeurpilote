@@ -30,7 +30,6 @@
                             <th>Titre de la publication</th>
                             <th class="text-center">Catégorie</th>
                             <th class="text-center">Utilisateur</th>
-                            <th class="text-center">Organisation</th>
                             <th  class="text-center">Statut</th>
                             <th  class="text-center">Action</th>
                         {% else %}
@@ -49,7 +48,6 @@
                                 <td> {{ listes.titre }} </td>
                                 <td class="text-center"> {{ listes.categorie_article.nom }} </td>
                                 <td class="text-center"> {{ listes.user_article.prenom }} </td>
-                                <td class="text-center"> {{ listes.user_article.organisation }} </td>
                                 {% if listes.statut==True%}
                                 <td  class="text-center"><a href=" {{ url_for('publication.statutpub', pub_id=listes.id)}} " class="btn btn-success"> <i class="ti-unlock"></i> </a></td>
                                 {% else %}

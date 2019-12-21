@@ -28,10 +28,10 @@
 
                 <thead>
                     <th>Noms</th>
-                    <th>Organisation</th>
                     <th>E-mail</th>
                     <th class="text-center">Mot de passe</th>
                     <th  class="text-center">Fonction</th>
+                    <th  class="text-center">Compositeur</th>
                     <th  class="text-center">Statut</th>
                     <th  class="text-center">Action</th>
                 </tr></thead>
@@ -39,10 +39,16 @@
                     {% for listes in liste%}
                         <tr>
                             <td> {{ ' {} {} {} '.format(listes.nom, listes.post_nom, listes.prenom)  }} </td>
-                            <td> {{ " {} ({}) ".format(listes.organisation, listes.domaine )  }} </td>
                             <td> {{ listes.username }} </td>
                             <td class="text-center"> <a href="{{ url_for('user.passuser', user_id=listes.id)}}">****** <i class="ti-pencil-alt"></i></a> </td>
                             <td  class="text-center"> {{ listes.role}} </td>
+                            
+                            {% if listes.compositeur==True%}
+                            <td  class="text-center"><a href="{{ url_for('user.compositeur', user_id=listes.id)}}  " class="btn btn-success"> <i class="fa fa-music"></i> </a></td>
+                            {% else %}
+                            <td  class="text-center"><a href="{{ url_for('user.compositeur', user_id=listes.id)}} " class="btn btn-danger"> <i class="ti-lock"></i> </a></td>
+                            {% endif%}
+
                             {% if listes.statut==True%}
                             <td  class="text-center"><a href="{{ url_for('user.statutuser', user_id=listes.id)}}  " class="btn btn-success"> <i class="ti-unlock"></i> </a></td>
                             {% else %}

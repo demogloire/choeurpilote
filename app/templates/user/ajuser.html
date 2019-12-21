@@ -99,45 +99,6 @@
                         </div>
                 </div>
 
-                <div class="row">
-                        <div class="col-md-5">
-                                <div class="form-group">
-                                        <label>Domaine de l'organisation</label>
-                                        {% if form.domaine.errors %}
-                                        {{ form.domaine(class="form-control select2 ")}}
-                                        <i class="form-group__bar"></i>
-                                        <div class="invalid-feedback">
-                                            {% for error in form.domaine.errors %}
-                                                <span>{{ error }}</span>
-                                            {% endfor %}
-                                        </div>
-                                        {% else %}
-                                        {{ form.domaine(class="form-control select2")}}
-                                        <i class="form-group__bar"></i>
-                                        {% endif %}
-                                </div>
-            
-                        </div>
-
-                    <div class="col-md-7">
-                            <div class="form-group">
-                                    <label>Organisation</label>
-                                    {% if form.organisation.errors %}
-                                    {{ form.organisation(class="form-control border-input is-invalid")}}
-                                    <i class="form-group__bar"></i>
-                                    <div class="invalid-feedback">
-                                        {% for error in form.organisation.errors %}
-                                            <span>{{ error }}</span>
-                                        {% endfor %}
-                                    </div>
-                                    {% else %}
-                                    {{ form.organisation(class="form-control border-input")}}
-                                    <i class="form-group__bar"></i>
-                                    {% endif %}
-                            </div>
-        
-                    </div>
-                </div>
 
                 <div class="row">
                     <div class="col-md-6">

@@ -24,6 +24,7 @@ class Article(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     slug=db.Column(db.String(128))
     statut = db.Column(db.Boolean, default=False) 
+    imagesurl=db.Column(db.String(200))
     document_pdf=db.Column(db.String(200))
     date_pub=db.Column(db.DateTime, nullable=False, default=datetime.utcnow )
     def __repr__(self):
@@ -35,27 +36,47 @@ class User(db.Model, UserMixin):
     post_nom = db.Column(db.String(128))
     prenom= db.Column(db.String(128))
     role = db.Column(db.String(128))
-    domaine = db.Column(db.String(128))
     username = db.Column(db.String(128))
     password = db.Column(db.String(128))
     statut=db.Column(db.Boolean, default=False) 
-    organisation = db.Column(db.String(60))
+    compositeur=db.Column(db.Boolean, default=False) 
     avatar=db.Column(db.String(128), nullable=False, default='default.png')
     articles = db.relationship('Article', backref='user_article', lazy='dynamic')
+    partitions = db.relationship('Partition', backref='user_partition', lazy='dynamic')
+    downloads= db.relationship('Download', backref='user_download', lazy='dynamic')
+    
 
     def __repr__(self):
         return ' {} '.format(self.nom)
 
-class Wificode(db.Model):
+class Partition(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    code_username = db.Column(db.String(128))
-    code_password = db.Column(db.String(128))
-    code_validation=db.Column(db.String(1))
-    debut_validation= db.Column(db.String(128))
-    fin_validation = db.Column(db.String(128))
-    adresse_mac = db.Column(db.String(128))
+    titre_parti= db.Column(db.String(128))
+    pdf_url = db.Column(db.String(128))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    type_id = db.Column(db.Integer, db.ForeignKey('types.id'), nullable=False)
     statut=db.Column(db.Boolean, default=False) 
+    downloads = db.relationship('Download', backref='download_partition', lazy='dynamic')
 
     def __repr__(self):
-        return ' {} '.format(self.code_username)
+        return ' {} '.format(self.titre_parti)
+
+class Download(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nbr_download= db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    partition_id = db.Column(db.Integer, db.ForeignKey('partition.id'), nullable=False)
+    statut=db.Column(db.Boolean, default=False)
+    
+    def __repr__(self):
+        return ' {} '.format(self.titre_parti)
+
+
+class Types(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nom = db.Column(db.String(128))
+    statut = db.Column(db.Boolean, default=False)  
+    partitions = db.relationship('Partition', backref='type_partition', lazy='dynamic')
+    def __repr__(self):
+        return ' {} '.format(self.nom)
 

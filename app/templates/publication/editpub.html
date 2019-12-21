@@ -83,7 +83,7 @@
                     <div class="row">
                         <div class="col-md-6">
                                 <div class="form-group">
-                                        <label> <small>DDoc PDF</small> </label>
+                                        <label> <small>Doc PDF</small> </label>
                                         {% if form.ed_document_pu.errors %}
                                         {{ form.ed_document_pu(class="file-control is-invalid")}}
                                         <i class="form-group__bar"></i>
@@ -98,6 +98,23 @@
                                         {% endif %}
                                 </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                    <label> <small>Image de l'Article</small> </label>
+                                    {% if form.ed_document_img.errors %}
+                                    {{ form.ed_document_img(class="file-control is-invalid")}}
+                                    <i class="form-group__bar"></i>
+                                    <div class="invalid-feedback">
+                                        {% for error in form.ed_document_img.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    {{ form.ed_document_img(class="file-control ")}}
+                                    <i class="form-group__bar"></i>
+                                    {% endif %}
+                            </div>
+                    </div>
                     </div>    
                     <div class="text-center">
                             <button class="btn btn-outline-info btn-md" id="submit" name="submit" type="submit">

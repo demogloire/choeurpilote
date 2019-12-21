@@ -12,11 +12,7 @@ from . import plateforme
 @plateforme.route('/', methods=['GET', 'POST'])
 def index():
    
-   if 'fin' in session:
-      temps_session=session['fin']
-   else:
-      return redirect(url_for('hos.connexion'))
-
+ 
    title='Bienvenue'
    #Requet des pagination et des listage des données
    page= request.args.get('page', 1, type=int)
@@ -46,10 +42,7 @@ def index():
 @plateforme.route('/valve', methods=['GET', 'POST'])
 def valve():
    
-   if 'fin' in session:
-      temps_session=session['fin']
-   else:
-      return redirect(url_for('hos.connexion'))
+
 
    title='Valve'
    #Requet des pagination et des listage des données
@@ -65,12 +58,6 @@ def valve():
 @plateforme.route('/publication/<string:id_slug>', methods=['GET', 'POST'])
 def pub(id_slug):
        
-
-   if 'fin' in session:
-      temps_session=session['fin']
-   else:
-      return redirect(url_for('hos.connexion'))
-
    title='Publication'
    #Liste des articles publiés
    post_rec=Article.query.filter_by(slug=id_slug).first()
