@@ -1,0 +1,31 @@
+   <!--==========================
+      Header
+    ============================-->
+    <header id="header">
+            <div class="container-fluid">
+        
+              <div id="logo" class="pull-left">
+                <h1><a href="#intro" class="scrollto">KAMAS Sarl</a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+              </div>
+        
+              <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                  <li ><a href=" {{ url_for('plateforme.index') }} ">Accueil </a></li>
+                  <li class="menu-has-children"><a href="" class="sf-with-ul">Nos produits</a>
+                    <ul style="display: none;">
+                      <li><a href="#">Commerce</a></li>
+                      <li><a href="#">Icubateur</a></li>
+                      <li><a href="#">Services</a></li>
+                      <li><a href="#">Industrie</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="/#services">Nos Services</a></li>
+                  <li class="menu-active"><a href=" {{ url_for('plateforme.valve')}} ">Valves</a></li>
+                  <li><a href="/#contact">Contact</a></li>
+                </ul>
+              </nav><!-- #nav-menu-container -->
+            </div>
+          </header><!-- #header -->
+        

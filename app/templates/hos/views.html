@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="col-lg-12 col-md-12">
+    <div class="card box-shadow--4dp" style="margin: 30px 80px 30px  80px">
+            
+        <div class="header">
+            <h4 class="title">Hotspot</h4>
+            <br>
+            <a href="{{ url_for('hos.hotcode')}}" class="btn btn-success"> <i class="ti-menu-alt"></i> Générer code </a>
+
+        </div>
+
+       <br>
+        {% with messages= get_flashed_messages(with_categories=true) %}
+            {% if messages  %}
+                {% for category, message in messages %}
+                    <div class="alert text-center alert-{{ category }}">
+                        <b>{{ message }}</b>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        <div class="content table-responsive table-full-width">
+            <table class="table table-striped">
+
+                <thead>
+                    <th>Code</th>
+                    <th  class="text-center">Password</th>
+                    <th  class="text-center">Validité</th>
+                    <th  class="text-center">Début</th>
+                    <th  class="text-center">Fin</th>
+                    <th  class="text-center">Adresse MAC</th>
+                    <th  class="text-center">Statut</th>
+                </tr></thead>
+                <tbody>
+                    {% for listes in liste.items%}
+                            <tr>
+                                <td> {{ listes.code_username }} </td>
+                                <td class="text-center"> {{ listes.code_password }} </td>
+                                {% if listes.code_validation=='A'%}
+                                <td class="text-center"> 30 minutes</td>
+                                {% elif listes.code_validation=='B' %}
+                                <td class="text-center"> 1 heures </td>
+                                {% elif listes.code_validation=='C' %}
+                                <td class="text-center"> 15 jours </td>
+                                {% elif listes.code_validation=='D' %}
+                                <td class="text-center"> 30 jours </td>
+                                {% endif%}
+
+                                {% if listes.debut_validation==None %}
+                                <td class="text-center"> Non utiliser</td>
+                                {% else  %}
+                                <td class="text-center"> {{ listes.debut_validation }}</td>
+                                {% endif%}
+
+                                {% if listes.fin_validation==None %}
+                                <td class="text-center"> Non utiliser</td>
+                                {% else  %}
+                                <td class="text-center"> {{ listes.fin_validation }}</td>
+                                {% endif%}
+
+                                {% if listes.adresse_mac==None %}
+                                <td class="text-center">En attente</td>
+                                {% else  %}
+                                <td class="text-center"> {{ listes.adresse_mac }}</td>
+                                {% endif%}
+                                
+                                {% if listes.statut==True%}
+                                <td  class="text-center"><a href="" class="btn btn-success"> <i class="ti-unlock"></i> </a></td>
+                                {% else %}
+                                <td  class="text-center"><a href=" " class="btn btn-danger"> <i class="ti-lock"></i> </a></td>
+                                {% endif%}
+                            </tr>  
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="box-footer clearfix">
+                <div class="text-center">
+                    {% for page_num in liste.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        {% if liste.page==page_num %}
+                            <a class="btn btn-info mb-4" href="{{ url_for('hos.hotsgen', page=page_num) }}">{{ page_num}}</a>
+                        {% else %}
+                            <a class="btn btn-outline-info mb-4" href="{{ url_for('hos.hotsgen', page=page_num) }}">{{ page_num}}</a>
+                        {% endif %}
+                    {% else %}
+                        ...
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

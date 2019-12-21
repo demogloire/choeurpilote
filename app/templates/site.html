@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="form">
+
+
+<!-- Mirrored from demo.themefisher.com/educenter/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 09 Feb 2019 21:21:23 GMT -->
+<head>
+  <meta charset="utf-8">
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    {% if title %}
+    <title>  {{ title }} </title>
+    {% else %}
+    <title>  Organisation </title>
+    {% endif %}
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+  
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+  
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+  
+    <!-- Bootstrap CSS File -->
+    <link href="{{url_for('static',filename='site/lib/bootstrap/css/bootstrap.min.css')}} " rel="stylesheet">
+    <link href="{{url_for('static',filename='site/lib/font-awesome/css/font-awesome.min.css')}} " rel="stylesheet">
+    <link href="{{url_for('static',filename='site/lib/animate/animate.min.css')}} " rel="stylesheet">
+    <link href="{{url_for('static',filename='site/lib/ionicons/css/ionicons.min.css')}} " rel="stylesheet">
+    <link href="{{url_for('static',filename='site/lib/owlcarousel/assets/owl.carousel.min.css')}} " rel="stylesheet">
+    <link href="{{url_for('static',filename='site/lib/owlcarousel/assets/owl.carousel.min.css')}} " rel="stylesheet">
+    <link href="{{url_for('static',filename='site/lib/lightbox/css/lightbox.min.css')}} " rel="stylesheet">
+    <link href="{{url_for('static',filename='site/css/style.css')}} " rel="stylesheet">
+    <link href="{{url_for('static',filename='css/c.css')}} " rel="stylesheet">
+  <!--Favicon-->
+  <link rel="shortcut icon" href="{{url_for('static',filename='site/images/favicon.html')}}" type="image/x-icon">
+  <link rel="icon" href="{{url_for('static',filename='images/favicon.html')}} " type="image/x-icon">
+
+</head>
+
+<body>
+
+    {% block menu %}
+    {% endblock menu %}
+ 
+    {% block carrousel %}
+    {% endblock carrousel %}
+  
+    <main id="main">
+        {% block body %}
+        {% endblock%}
+
+    </main>
+
+    <!--==========================
+      Footer
+    ============================-->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+  
+            <div class="col-lg-3 col-md-6 footer-info">
+              <h3>KAMAS Sarl</h3>
+              <p class="text-justify">
+                KAMAS Multiservices Sarl, est entreprise d'immatriculation congolaise, qui interviens dans plusieurs secteurs d'activité entre autres, commerce général, NTIC, sous-traitance etc..
+              </p>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 footer-links">
+              <h4>Nos liens</h4>
+              <ul>
+                <li><i class="ion-ios-arrow-right"></i> <a href="#intro">Accueil </a></li>
+                <li><i class="ion-ios-arrow-right"></i> <a href="#services">Nos Services</a></li>
+                <li><i class="ion-ios-arrow-right"></i> <a href="#valves">Valves</a></li>
+                <li><i class="ion-ios-arrow-right"></i> <a href="#contact">Contact</a></li>
+                <li><i class="ion-ios-arrow-right"></i> <a href="#">Privacy policy</a></li>
+              </ul>
+            </div>
+  
+            <div class="col-lg-3 col-md-6 footer-contact">
+              <h4>Contactez - nous</h4>
+              <p>
+                Ville de Goma <br>
+                Le Voclcan No 30 <br>
+                R.D.Congo <br>
+                <strong>Phone:</strong> 243 99332122139<br>
+                <strong>Email:</strong> info@kamasmultiservice.org<br>
+              </p>
+  
+              <div class="social-links">
+                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+              </div>
+  
+            </div>
+  
+            <div class="col-lg-3 col-md-6 footer-newsletter">
+              <h4>Nos Newsletter</h4>
+              <p>
+                Si vous voulez vous inscire sur nos news letter, veuillez laisser votre adresse E-mail, pour recevoir nos nouvelles.
+              </p>
+              <form action="" method="post">
+                <input type="email" name="email"><input type="submit"  value="Inscrire">
+              </form>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+  
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <strong>KAMAS Multiservices Sarl</strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+       
+          Par MCG
+        </div>
+      </div>
+    </footer><!-- #footer -->
+  
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  
+    <!-- JavaScript Libraries -->
+    <script src="{{ url_for('static',filename='site/lib/jquery/jquery.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/jquery/jquery-migrate.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/bootstrap/js/bootstrap.bundle.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/easing/easing.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/superfish/hoverIntent.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/superfish/superfish.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/wow/wow.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/waypoints/waypoints.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/counterup/counterup.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/owlcarousel/owl.carousel.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/isotope/isotope.pkgd.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/touchSwipe/jquery.touchSwipe.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/touchSwipe/jquery.touchSwipe.min.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/lib/contactform/contactform.js')}} "></script>
+    <script src="{{ url_for('static',filename='site/js/main.js')}} "></script>
+
+  
+  </body>
+  </html>

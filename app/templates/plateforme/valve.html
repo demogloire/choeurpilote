@@ -1,0 +1,100 @@
+{% extends "site.html" %}
+
+{% block menu %}
+    <!-- Slider Start -->
+    {% include "menu_two.html" %}
+{% endblock menu %}
+
+{% block body %}
+
+        <!--==========================
+          Call To Action Section
+        ============================-->
+        <section id="call-to-action" class="wow fadeIn">
+          <div class="container text-center">
+            <br><br><br>
+            <h3>Valve électronique</h3>
+          </div>
+        </section><!-- #call-to-action -->
+    
+        <!--==========================
+          Skills Section
+        ============================-->
+        <section id="valves">
+          <div class="container">
+            <header class="section-header"></header>
+    
+            <div class="skills-content">
+              <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    {% for listes in liste.items%}
+                      {% if listes.statut==True %}
+                      <a href="{{ url_for('plateforme.pub', id_slug=listes.slug)}}">
+                          <article class="box-shadow--3dp" style="margin-top: 10px;">
+                              <div class="row">
+                                  <div class="col-lg-2 col-md-2">
+                                      <img height="80" width="80" class="img-responsive img-circle" src=" {{ url_for("static", filename="default.png")}} " alt="">
+                                  </div>
+      
+                                  <div class="col-lg-10 col-md-10">
+                                      <h3 style="margin-bottom:0%;"> <a style="color:blue;" href="{{ url_for('plateforme.pub', id_slug=listes.slug)}} "> {{ listes.titre}} </a> </h2>
+                                        <p><small><i>Publier par <b>{{'{}({})'.format(listes.user_article.prenom, listes.user_article.organisation) }}</b> 
+                                            le {{ listes.date_pub.strftime('%d-%m-%Y') }} </small></i></p>
+                                      <a href="{{ url_for('plateforme.pub', id_slug=listes.slug)}}" class="btn btn-outline-info btn-md">Lire la publication</a>
+                                    </div>
+                              </div>
+                              <br>       
+                          </article>
+                      </a>
+                      {% endif %}
+                    {% endfor %}
+                              
+                    <div class="box-footer clearfix">
+                        <div class="text-center">
+                            {% for page_num in liste.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                                    {% if page_num %}
+                                        {% if liste.page==page_num %}
+                                            <a class="btn btn-info mb-4" href="{{ url_for('plateforme.valve', page=page_num) }}">{{ page_num}}</a>
+                                        {% else %}
+                                            <a class="btn btn-outline-info mb-4" href="{{ url_for('plateforme.valve', page=page_num) }}">{{ page_num}}</a>
+                                        {% endif %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
+                                    {% endfor %}
+                        </div>
+                      </div>
+                  </div>
+                <div class="col-lg-4 col-md-4 box-shadow--2dp" style="margin-top: 10px; padding:10px;">
+                    <h5> <b>AUTRES PUBLICATIONS</b> </h5>
+                    
+                    {% for donnees in rec%}
+                    
+                    <div style="margin-top: 2px;">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2">
+                                <img height="40" width="40" class="img-responsive img-circle" src=" {{ url_for("static", filename="default.png")}}" alt="">
+                            </div>
+
+                            <div class="col-lg-10 col-md-10">
+                                <div class="st">
+                                    <p style="margin-bottom:0%;"> <a style="color:blue;" href="{{ url_for('plateforme.pub', id_slug=donnees.slug)}}"> {{ donnees.titre}} </a> </p>
+                                    <p style="margin-bottom:0%;"><small>Par <b>{{'{}({})'.format(donnees.user_article.prenom, donnees.user_article.organisation) }}</b></small></p>  
+                                </div>
+                                
+                              </div>
+                        </div>
+                        <br>
+                      </div>
+                    {% endfor %}               
+                </div>
+              </div>
+    
+            </div>
+            
+          </div>
+          <br>
+        </section>
+    
+
+{% endblock body %}

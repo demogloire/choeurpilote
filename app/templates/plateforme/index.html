@@ -1,0 +1,312 @@
+{% extends "site.html" %}
+
+
+{% block menu %}
+    <!-- Slider Start -->
+    {% include "menu_one.html" %}
+{% endblock menu %}
+
+{% block carrousel %}
+    <!-- Slider Start -->
+    {% include "carrousel.html" %}
+{% endblock carrousel %}
+
+{% block body %}
+ 
+        <!--==========================
+          Featured Services Section
+        ============================-->
+        <section id="featured-services">
+          <div class="container">
+            <div class="row">
+    
+              <div class="col-lg-4 box">
+                <div class="text-center"><i class="ion-at"></i></div> 
+                <h4 class="text-center title"><a href="">Fournisseur internet</a></h4>
+                <p class="description text-justify">
+                  Grâce à la connection fibre optique, nous distribuons la connxion internet jusqu'à à une vitesse de 5Mb par séconde.
+                </p>
+                </div>
+    
+              <div class="col-lg-4 box box-bg">
+                <div class="text-center"><i class="ion-laptop"></i></div> 
+                <h4 class=" text-center title"><a href="">NTIC</a></h4>
+                <p class="description text-justify">
+                  Nous disposons d'une équipe dynamique capable de concevoir et de réaliserdes application sur mesure pour 
+                  vos entreprise.
+                </p>
+              </div>
+    
+              <div class="col-lg-4 box">
+                  <div class="text-center"><i class="ion-ios-cart-outline"></i></div>
+                <h4 class="text-center title"><a href="">Commerce</a></h4>
+                <p class="description text-justify">
+                  Notre departement des affaires met à la disposition des clients, une expertise de haut niveau pour satisfaire au mieux. 
+                </p>
+              </div>
+    
+            </div>
+          </div>
+        </section><!-- #featured-services -->
+      
+        <!--==========================
+          Services Section
+        ============================-->
+        <section id="services">
+          <div class="container">
+    
+            <header class="section-header wow fadeInUp">
+              <h3>Services</h3>
+              <p>KAMAS Multi-services Sarl, est une entreprise qui est conforme à la legislation congolaise et repond aux normes des affaires 
+                OHADA, elle a plusieurs services et garantire la fiabilité et la transparence dans ses actions.
+              </p>
+            </header>
+    
+            <div class="row">
+    
+              <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
+                <div class="icon"><i class="ion-ios-cart-outline"></i></div>
+                <h4 class="title"><a href="">Commerce général</a></h4>
+                <p class="description text-justify">Nous faisons le commerce des biens et des services sur le plan international et national
+                    avec un prix competitif.
+                  </p>
+              </div>
+              <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
+                <div class="icon"><i class="ion-ios-timer"></i></div>
+                <h4 class="title"><a href="">Distribution internet</a></h4>
+                <p class="description">
+                  Connectez-vous sur votre téléphone, tablette, laptop et autres support nécessitant la connexion internet à seulement 300FC/30 minutes, 500FC/1heure, 6$/15jours et 15$/30jours.
+                </p>
+              </div>
+              <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
+                <div class="icon"><i class="ion-person-stalker"></i></div>
+                <h4 class="title"><a href="">Sous traitance</a></h4>
+                <p class="text-justify description">
+                  Nous faisons de la sous traitance dans plusieurs domaines selon la demande des entreprises et des personnes en besoin.
+                </p>
+              </div>
+              <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+                <div class="icon"><i class="ion-load-d"></i></div>
+                <h4 class="title"><a href="">Visibilité</a></h4>
+                <p class="text-justify description">
+                    Par notre valve électronique, nous mettons vos publications en ligne, pour permettre votre visilibilité.
+                  </p>
+  
+                 </div>
+              <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+                <div class="icon"><i class="ion-ios-monitor"></i></div>
+                <h4 class="title"><a href="">NTIC</a></h4>
+                <p class="text-justify description">
+                  Nous intervenons dans le domaine de fintech, pour mettre en place des solutions informatiques aux entreprises.
+                </p>
+              </div>
+              <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+              </div>
+    
+            </div>
+    
+          </div>
+        </section><!-- #services -->
+    
+        <!--==========================
+          Call To Action Section
+        ============================-->
+        <section id="call-to-action" class="wow fadeIn">
+          <div class="container text-center">
+            <h3>Valve électronique</h3>
+          </div>
+        </section><!-- #call-to-action -->
+    
+        <!--==========================
+          Skills Section
+        ============================-->
+        <section id="valves">
+          <div class="container">
+            <header class="section-header"></header>
+    
+            <div class="skills-content">
+              <div class="row">
+                <div class="col-lg-8 col-md-8">
+                    {% for listes in liste%}
+                      {% if listes.statut==True %}
+                      <a href="{{ url_for('plateforme.pub', id_slug=listes.slug)}}">
+                          <article class="box-shadow--3dp" style="margin-top: 10px;">
+                              <div class="row">
+                                  <div class="col-lg-2 col-md-2">
+                                      <img height="80" width="80" class="img-responsive img-circle" src="{{ url_for("static", filename="default.png") }}" alt="">
+                                  </div>
+      
+                                  <div class="col-lg-10 col-md-10">
+                                      <h3 style="margin-bottom:0%;"> <a style="color:blue;" href="{{ url_for('plateforme.pub', id_slug=liste.slug)}}"> {{ listes.titre}} </a> </h2>
+                                        <p><small><i>Publier par <b>{{'{}({})'.format(listes.user_article.prenom, listes.user_article.organisation) }}</b> 
+                                            le {{ listes.date_pub.strftime('%d-%m-%Y') }} </small></i></p>
+                                      <a href="{{ url_for('plateforme.pub', id_slug=listes.slug)}}" class="btn btn-outline-info btn-md">Lire la publication</a>
+                                    </div>
+                              </div>
+                              <br>
+                              
+      
+                          </article>
+                      </a>
+                     
+                      {% endif %}
+                    {% endfor %}
+                                  
+                  </div>
+                <div class="col-lg-4 col-md-4 box-shadow--2dp" style="margin-top: 10px; padding:10px;">
+                    <h5> <b>PUBLICATIONS RECENTES</b> </h5>
+                    {% for donnees in rec%}
+                   
+                    <div style="margin-top: 2px;">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2">
+                                <img height="40" width="40" class="img-responsive img-circle" src=" {{ url_for("static", filename="default.png")}} " alt="">
+                            </div>
+
+                            <div class="col-lg-10 col-md-10">
+                                <div class="st">
+                                    <p style="margin-bottom:0%;"> <a style="color:blue;" href="{{ url_for('plateforme.pub', id_slug=donnees.slug)}}"> {{ donnees.titre}} </a> </p>
+                                    <p style="margin-bottom:0%;"><small>Par <b>{{'{}({})'.format(donnees.user_article.prenom, donnees.user_article.organisation) }}</b></small></p>  
+                                </div>
+                                
+                              </div>
+                        </div>
+                        <br>
+                      </div>
+                    {% endfor %}               
+                </div>
+              </div>
+    
+            </div>
+            <div class="box-footer clearfix">
+                <div class="text-center">
+                    <a class="btn btn-outline-warning mb-4 " href="{{url_for('plateforme.valve')}} "> Plus des publications</a>
+                </div>
+              </div>
+          </div>
+          <br>
+        </section>
+    
+        <!--==========================
+          Facts Section
+        ============================-->
+        <section id="facts"  class="wow fadeIn">
+          <div class="container">
+  
+            <div class="row counters">
+    
+              <div class="col-lg-6 col-12 text-center">
+                <span data-toggle="counter-up"> {{ clie_nbr }} </span>
+                <p>Clients</p>
+              </div>
+    
+              <div class="col-lg-6 col-12 text-center">
+                <span data-toggle="counter-up"> {{art_nbr}} </span>
+                <p>Publications</p>
+              </div>
+    
+            
+    
+            </div>
+    
+            <div class="facts-img">
+              <img src="img/facts-img.png" alt="" class="img-fluid">
+            </div>
+    
+          </div>
+        </section><!-- #facts -->
+        
+        <!--==========================
+          Clients Section
+        ============================-->
+        <section id="clients" class="wow fadeInUp">
+          <div class="container">
+    
+            <header class="section-header">
+              <h3>Nos clients</h3>
+            </header>
+    
+            <div class="owl-carousel clients-carousel">
+              <img src="img/clients/client-1.png" alt="">
+              <img src="img/clients/client-2.png" alt="">
+              <img src="img/clients/client-3.png" alt="">
+              <img src="img/clients/client-4.png" alt="">
+              <img src="img/clients/client-5.png" alt="">
+              <img src="img/clients/client-6.png" alt="">
+              <img src="img/clients/client-7.png" alt="">
+              <img src="img/clients/client-8.png" alt="">
+            </div>
+    
+          </div>
+        </section><!-- #clients -->
+    
+        <!--==========================
+          Contact Section
+        ============================-->
+        <section id="contact" class="section-bg wow fadeInUp">
+          <div class="container">
+    
+            <div class="section-header">
+              <h3>Contactez - nous</h3>
+              <p>Rejoignez-nous sur les adresse suivant:</p>
+            </div>
+    
+            <div class="row contact-info">
+    
+              <div class="col-md-4">
+                <div class="contact-address">
+                  <i class="ion-ios-location-outline"></i>
+                  <h3>Adresse</h3>
+                  <address>Ville de Goma, le Voclcan No 30</address>
+                </div>
+              </div>
+    
+              <div class="col-md-4">
+                <div class="contact-phone">
+                  <i class="ion-ios-telephone-outline"></i>
+                  <h3>Numéro de téléphone</h3>
+                  <p><a href="tel:+24399332122139">243 99332122139</a></p>
+                </div>
+              </div>
+    
+              <div class="col-md-4">
+                <div class="contact-email">
+                  <i class="ion-ios-email-outline"></i>
+                  <h3>Email</h3>
+                  <p><a href="mailto:info@kamasmultiservice.org">info@kamasmultiservice.org</a></p>
+                </div>
+              </div>
+    
+            </div>
+    
+            <div class="form">
+              <div id="sendmessage">Votre message a été envoyé avec succès!</div>
+              <div id="errormessage"></div>
+              <form action="" method="post" role="form" class="contactForm">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Votre nom" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                    <div class="validation"></div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Votre email" data-rule="email" data-msg="Please enter a valid email" />
+                    <div class="validation"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Objet" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Votre message"></textarea>
+                  <div class="validation"></div>
+                </div>
+                <div class="text-center"><button type="submit">Envoyer</button></div>
+              </form>
+            </div>
+    
+          </div>
+        </section><!-- #contact -->
+    
+
+{% endblock body %}
