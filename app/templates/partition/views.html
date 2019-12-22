@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card box-shadow--4dp">
+            
+        <div class="header">
+            <h4 class="title">Les partitions sur la plateforme</h4>
+            <br>
+            <a href="{{ url_for('partition.ajouterpart')}}" class="btn btn-primary"> <i class="ti-receipt "></i> Ajouter partition </a>
+        </div>
+        <br>
+       
+        {% with messages= get_flashed_messages(with_categories=true) %}
+            {% if messages  %}
+                {% for category, message in messages %}
+                    <div class="alert text-center alert-{{ category }}">
+                        <b>{{ message }}</b>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        <div class="content table-responsive table-full-width">
+            <table class="table table-striped">
+
+                <thead>
+                   
+                        {% if current_user.role =='Admin' %}
+                            <th>Titre de la partition</th>
+                            <th class="text-center">Partie </th>
+                            <th  class="text-center">Auteur</th>
+                            <th  class="text-center">Voir</th>
+                            <th  class="text-center">Télécharger</th>
+                            <th  class="text-center">Statut</th>
+                            <th  class="text-center">Action</th>
+                        {% else %}
+                            <th>Titre de la publication</th>
+                            <th class="text-center">Partie</th>
+                            <th  class="text-center">Voir</th>
+                            <th  class="text-center">Télécharger</th>
+                            <th  class="text-center">Statut sur plateforme</th>
+                            <th  class="text-center">Action</th>
+                        {% endif%}
+                    
+
+                </tr></thead>
+                <tbody>
+                    {% for listes in liste.items%}
+                        {% if current_user.role =='Admin' %}
+                            <tr>
+                                <td> {{ listes.titre_parti }} </td>
+                                <td class="text-center"> {{ listes.type_partition.nom }} </td>
+                                <td class="text-center"> {{ listes.user_partition.prenom }} </td>
+                                <td class="text-center"> <a  target="blank" href=" {{ url_for('partition.telechargement', part_id=listes.id)}}" class="btn btn-success"><i class="ti-download"></i></a> </td>
+                                <td class="text-center"> <a href="" class="btn btn-info">{{ listes.nbr_download }}</a></td>
+                                {% if listes.statut==True%}
+                                <td  class="text-center"><a href=" {{ url_for('partition.statutpart', part_id=listes.id)}} " class="btn btn-success"> <i class="ti-unlock"></i> </a></td>
+                                {% else %}
+                                <td  class="text-center"><a href=" {{ url_for('partition.statutpart', part_id=listes.id)}} " class="btn btn-danger"> <i class="ti-lock"></i> </a></td>
+                                {% endif%}
+                                <td  class="text-center"> <a href="{{ url_for('partition.editpart', part_id=listes.id)}} " class="btn btn-warning"> <i class="ti-pencil-alt"></i> </a> </td>
+                            </tr>
+                        {% endif %}       
+                    {% endfor %}
+
+                    {% for listes in liste.items%}
+                        {% if current_user.role =='Webmaster' %}
+                        {% if listes.user_id == current_user.id %}
+                        
+                            <tr>
+                                <td> {{ listes.titre_parti }} </td>
+                                <td class="text-center"> {{ listes.type_partition.nom }} </td>
+                                <td class="text-center"> <a  target="blank" href=" {{ url_for('partition.telechargement', part_id=listes.id)}}" class="btn btn-success"><i class="ti-download"></i></a> </td>
+                                <td class="text-center"> <a href="" class="btn btn-info">{{ listes.nbr_download }}</a></td>
+
+                                {% if listes.statut==True%}
+                                <td  class="text-center"><a href="" class="btn btn-success"> <i class="ti-unlock"></i> </a></td>
+                                {% else %}
+                                <td  class="text-center"><a href="" class="btn btn-danger"> <i class="ti-lock"></i> </a></td>
+                                {% endif%}
+                                <td  class="text-center"> <a href="" class="btn btn-warning"> <i class="ti-pencil-alt"></i> </a> </td>
+                            </tr>
+                                
+                        {% endif%}
+                        {% endif%}
+                    {% endfor %}
+ 
+                </tbody>
+            </table>
+
+            <div class="box-footer clearfix">
+                <div class="text-center">
+                    {% for page_num in liste.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        {% if liste.page==page_num %}
+                            <a class="btn btn-info mb-4" href="{{ url_for('partition.lipuart', page=page_num) }}">{{ page_num}}</a>
+                        {% else %}
+                            <a class="btn btn-outline-info mb-4" href="{{ url_for('partition.lipuart', page=page_num) }}">{{ page_num}}</a>
+                        {% endif %}
+                    {% else %}
+                        ...
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

@@ -43,8 +43,7 @@ class User(db.Model, UserMixin):
     avatar=db.Column(db.String(128), nullable=False, default='default.png')
     articles = db.relationship('Article', backref='user_article', lazy='dynamic')
     partitions = db.relationship('Partition', backref='user_partition', lazy='dynamic')
-    downloads= db.relationship('Download', backref='user_download', lazy='dynamic')
-    
+  
 
     def __repr__(self):
         return ' {} '.format(self.nom)
@@ -56,20 +55,12 @@ class Partition(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     type_id = db.Column(db.Integer, db.ForeignKey('types.id'), nullable=False)
     statut=db.Column(db.Boolean, default=False) 
-    downloads = db.relationship('Download', backref='download_partition', lazy='dynamic')
-
-    def __repr__(self):
-        return ' {} '.format(self.titre_parti)
-
-class Download(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nbr_download= db.Column(db.Integer)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    partition_id = db.Column(db.Integer, db.ForeignKey('partition.id'), nullable=False)
-    statut=db.Column(db.Boolean, default=False)
+    nbr_download= db.Column(db.Integer, default=0)
     
     def __repr__(self):
         return ' {} '.format(self.titre_parti)
+
+
 
 
 class Types(db.Model):

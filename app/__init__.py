@@ -71,4 +71,7 @@ def create_app(config_name):
     from .types import types as types_blueprint
     app.register_blueprint(types_blueprint)
 
+    from .partition import partition as partition_blueprint
+    app.register_blueprint(partition_blueprint)
+
     return app
