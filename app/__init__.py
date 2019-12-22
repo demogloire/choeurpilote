@@ -1,5 +1,4 @@
 import os
-
 from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
@@ -68,5 +67,8 @@ def create_app(config_name):
 
     from .plateforme import plateforme as plateforme_blueprint
     app.register_blueprint(plateforme_blueprint)
+
+    from .types import types as types_blueprint
+    app.register_blueprint(types_blueprint)
 
     return app
