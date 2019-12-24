@@ -1,31 +1,36 @@
-   <!--==========================
-      Header
-    ============================-->
-    <header id="header">
-            <div class="container-fluid">
-        
-              <div id="logo" class="pull-left">
-                <h1><a href="#intro" class="scrollto">KAMAS Sarl</a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
-              </div>
-        
-              <nav id="nav-menu-container">
-                <ul class="nav-menu">
-                  <li class="menu-active"><a href="#intro">Accueil </a></li>
-                  <li class="menu-has-children"><a href="" class="sf-with-ul">Nos produits</a>
-                    <ul style="display: none;">
-                      <li><a href="#">Commerce</a></li>
-                      <li><a href="#">Icubateur</a></li>
-                      <li><a href="#">Services</a></li>
-                      <li><a href="#">Industrie</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#services">Nos Services</a></li>
-                  <li><a href="#valves">Valves</a></li>
-                  <li><a href="#contact">Contact</a></li>
+<!--================Header Area =================-->
+  <header class="header_area">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand logo_h" href="index.html"><img height="40px" width="163px" src="{{ url_for('static',filename='logo/newpann.png')}}" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                <ul class="nav navbar-nav menu_nav ml-auto">
+                    <li class="nav-item active"><a class="nav-link" href="index.html">Accueil</a></li> 
+                    <li class="nav-item submenu dropdown">
+                      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">A propos</a>
+                      <ul class="dropdown-menu">
+                          <li class="nav-item"><a class="nav-link" href="blog.html">Qui sommes-nous</a></li>
+                          <li class="nav-item"><a class="nav-link" href="blog.html">Historique</a></li>
+                          <li class="nav-item"><a class="nav-link" href="blog.html">Comité du choeur</a></li>
+                          <li class="nav-item"><a class="nav-link" href="blog-single.html">Prospective</a></li>
+                      </ul>
+                    </li> 
+                    <li class="nav-item"><a class="nav-link" href="accomodation.html">Agenda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">événements</a></li>
+               
+                    <li class="nav-item"><a class="nav-link" href="elements.html">médias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Actualités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 </ul>
-              </nav><!-- #nav-menu-container -->
-            </div>
-          </header><!-- #header -->
-        
+            </div> 
+        </nav>
+    </div>
+</header>
+<!--================Header Area =================-->

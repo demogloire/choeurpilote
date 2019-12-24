@@ -50,7 +50,7 @@ def ajouterpub():
          save_publication=Article(titre=form.titre.data.capitalize(), imagesurl=img_download, slug=titre, resume=form.resume.data, document_pdf=pdf_download, categorie_id=form.cate_pub.data.id, user_article=current_user)
          db.session.add(save_publication)
          db.session.commit()
-         flash("Ajout de la publication avec succès",'succes')
+         flash("Ajout de la publication avec succès",'success')
          return redirect(url_for('publication.lipub'))
 
       elif form.document_pu.data:
@@ -66,7 +66,7 @@ def ajouterpub():
          save_publication=Article(titre=form.titre.data.capitalize(), slug=titre, resume=form.resume.data, document_pdf=pdf_download, categorie_id=form.cate_pub.data.id, user_article=current_user)
          db.session.add(save_publication)
          db.session.commit()
-         flash("Ajout de la publication avec succès",'succes')
+         flash("Ajout de la publication avec succès",'success')
          return redirect(url_for('publication.lipub'))
 
       elif form.document_img.data:
@@ -83,14 +83,14 @@ def ajouterpub():
          save_publication=Article(titre=form.titre.data.capitalize(), imagesurl=img_download, slug=titre, resume=form.resume.data, categorie_id=form.cate_pub.data.id, user_article=current_user)
          db.session.add(save_publication)
          db.session.commit()
-         flash("Ajout de la publication avec succès",'succes')
+         flash("Ajout de la publication avec succès",'success')
          return redirect(url_for('publication.lipub'))
       else:
          save_publication=Article(titre=form.titre.data.capitalize(), slug=titre, resume=form.resume.data, 
                               categorie_id=form.cate_pub.data.id, user_article=current_user)
          db.session.add(save_publication)
          db.session.commit()
-         flash("Ajout de la publication avec succès",'succes')
+         flash("Ajout de la publication avec succès",'success')
          return redirect(url_for('publication.lipub'))
 
    return render_template('publication/ajpub.html', form=form, title=title)

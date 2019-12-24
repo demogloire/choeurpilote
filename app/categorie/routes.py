@@ -13,12 +13,12 @@ from . import categorie
 @login_required
 def ajoutcate():
 
-   #La modification du mot de passe par l'administrateur.
+   #autorisation par l'administrateur.
    if current_user.role!='Admin':
       return redirect(url_for('main.dashboard'))
 
    #Titre 
-   title='Categorisation'
+   title='Catégorie publication | Choeur Pilote'
    #formulaire
    form=AjoutCatForm()
 
@@ -37,11 +37,11 @@ def ajoutcate():
 @categorie.route('/lis_categorie', methods=['GET', 'POST'])
 @login_required
 def litcate():
-   #La modification du mot de passe par l'administrateur.
+   #autorisation par administrateur
    if current_user.role!='Admin':
       return redirect(url_for('main.dashboard'))
    #Titre
-   title='Categorisation'
+   title='Catégorie publication | Choeur Pilote'
    #Requête d'affichage de la categorisation
    listes=Categorie.query.order_by(Categorie.id.desc())
    return render_template('categorie/views.html',title=title, liste=listes)
@@ -54,8 +54,7 @@ def litcate():
 @login_required
 def statutcat(cat_id):
    #Titre
-   title='Categorisation | Kivu Exchange'
-
+   title='Catégorie publication | Choeur Pilote'
    #La modification du mot de passe par l'administrateur.
    if current_user.role!='Admin':
       return redirect(url_for('main.dashboard'))
@@ -92,7 +91,7 @@ def editcate(cate_id):
    
    form=EditCatForm()
    #Titre
-   title='Catégorisation'
+   title='Catégorie publication | Choeur Pilote'
    #Requête de vérification du type
    cate_class=Categorie.query.filter_by(id=cate_id).first()
    #Le nom du type encours de modification

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <link rel="apple-touch-icon" href=" {{url_for('static',filename='logo/t.png')}} ">
+    <link rel="apple-touch-icon" href=" {{url_for('static',filename='logo/cppcu.png')}} ">
     <link rel="shortcut icon" href=" {{url_for('static',filename='logo/t.ico')}} ">
 
         
@@ -33,7 +33,7 @@
     <body>
 
         <div class="wrapper">
-            <div class="sidebar" data-background-color="black" data-active-color="info">
+            <div class="sidebar" data-background-color="white" data-active-color="info">
         
             <!--
                 Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
@@ -43,30 +43,49 @@
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <a href="" class="simple-text">
-                            KAMAS Sarl
+                            CPPCU
                         </a>
                     </div>
-        
                     <ul class="nav">
-                        <li >
-                            <a href="{{ url_for('publication.lipub')}}">
-                                <i class="ti-receipt"></i>
-                                <p>Publication</p>
-                            </a>
-                        </li>
-                       
-                        {% if current_user.role=='Admin'%}
+                        
+                        {% if current_user.compositeur == True  and current_user.role=='Webmaster': %}
+                            <li >
+                                <a href="{{ url_for('publication.lipub')}}">
+                                    <i class="ti-receipt"></i>
+                                    <p>Publication</p>
+                                </a>
+                            </li>
                             <li>
-                                <a href="{{ url_for('main.config')}} ">
-                                    <i class="ti-server"></i>
-                                    <p>Configuration</p>
+                                <a href="{{ url_for('partition.lipuart')}} ">
+                                    <i class="ti-music-alt"></i>
+                                    <p>Partition</p>
+                                </a>
+                            </li>
+                        {% elif current_user.compositeur == True  and current_user.role=='Compositeur': %}
+                            <li>
+                                <a href="{{ url_for('partition.lipuart')}} ">
+                                    <i class="ti-music-alt"></i>
+                                    <p>Partition</p>
+                                </a>
+                            </li>
+                        {% elif current_user.compositeur == True  and current_user.role=='Admin': %}
+                            <li >
+                                <a href="{{ url_for('publication.lipub')}}">
+                                    <i class="ti-receipt"></i>
+                                    <p>Publication</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('partition.lipuart')}} ">
+                                    <i class="ti-music-alt"></i>
+                                    <p>Partition</p>
                                 </a>
                             </li>
 
                             <li>
-                                <a href=" ">
-                                    <i class="ti-signal"></i>
-                                    <p>Code Hotspot</p>
+                                <a href="{{ url_for('main.config')}} ">
+                                    <i class="ti-server"></i>
+                                    <p>Configuration</p>
                                 </a>
                             </li>
                         {% endif %} 
@@ -119,7 +138,7 @@
         
                                 <li>
                                     <a href="">
-                                        Organisation
+                                        CPPCU
                                     </a>
                                 </li>
                             </ul>

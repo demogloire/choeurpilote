@@ -30,4 +30,4 @@ def login():
 @auth.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('plateforme.index'))
+    return redirect(url_for('siteweb.index'))

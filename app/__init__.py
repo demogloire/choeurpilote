@@ -65,13 +65,13 @@ def create_app(config_name):
     from .publication import publication as publication_blueprint
     app.register_blueprint(publication_blueprint)
 
-    from .plateforme import plateforme as plateforme_blueprint
-    app.register_blueprint(plateforme_blueprint)
-
     from .types import types as types_blueprint
     app.register_blueprint(types_blueprint)
 
     from .partition import partition as partition_blueprint
     app.register_blueprint(partition_blueprint)
+
+    from .siteweb import siteweb as siteweb_blueprint
+    app.register_blueprint(siteweb_blueprint)
 
     return app

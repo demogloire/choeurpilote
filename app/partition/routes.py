@@ -60,7 +60,7 @@ def lipuart():
 @login_required
 def telechargement(part_id):   
    #Titre
-   title='Partition de la messe | CPPCU'
+   title='Partition de la messe | Choeur Pilote'
    #Requête de vérification de la partition
    part_li=Partition.query.filter_by(id=part_id).first()
    #Partition
