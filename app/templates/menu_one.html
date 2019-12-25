@@ -12,20 +12,19 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                 <ul class="nav navbar-nav menu_nav ml-auto">
-                    <li class="nav-item active"><a class="nav-link" href="index.html">Accueil</a></li> 
+                    <li class="nav-item active"><a class="nav-link" href="{{ url_for('siteweb.index') }}">Accueil</a></li> 
                     <li class="nav-item submenu dropdown">
                       <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">A propos</a>
                       <ul class="dropdown-menu">
-                          <li class="nav-item"><a class="nav-link" href="blog.html">Qui sommes-nous</a></li>
-                          <li class="nav-item"><a class="nav-link" href="blog.html">Historique</a></li>
-                          <li class="nav-item"><a class="nav-link" href="blog.html">Comité du choeur</a></li>
-                          <li class="nav-item"><a class="nav-link" href="blog-single.html">Prospective</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{{ url_for('siteweb.quisommes') }}">Qui sommes-nous</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{{ url_for('siteweb.historique') }}">Historique</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{{ url_for('siteweb.comite') }}">Comité du choeur</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{{ url_for('siteweb.prospectif') }}">prospectif</a></li>
                       </ul>
                     </li> 
-                    <li class="nav-item"><a class="nav-link" href="accomodation.html">Agenda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="gallery.html">événements</a></li>
-               
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('siteweb.agenda') }}">Agenda</a></li>
                     <li class="nav-item"><a class="nav-link" href="elements.html">médias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Partitions</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Actualités</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 </ul>

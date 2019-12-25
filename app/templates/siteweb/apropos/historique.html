@@ -1,0 +1,22 @@
+{% extends "autrespage.html" %}
+
+{% block body %}
+
+<section class="blog_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <p class="text-justify">
+                    {{ rec.contenu|markdown}}
+                </p>
+            </div>
+            <div class="col-lg-4">
+                {% include 'sidebarapropos.html' %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area =================-->
+
+{% endblock body %}
+

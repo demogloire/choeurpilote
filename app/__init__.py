@@ -74,4 +74,10 @@ def create_app(config_name):
     from .siteweb import siteweb as siteweb_blueprint
     app.register_blueprint(siteweb_blueprint)
 
+    from .statpage import statpage as statpage_blueprint
+    app.register_blueprint(statpage_blueprint)
+
+    from .album import album as album_blueprint
+    app.register_blueprint(album_blueprint)
+
     return app

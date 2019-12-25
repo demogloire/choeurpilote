@@ -1201,7 +1201,7 @@ button:focus {
 .blog_right_sidebar .widget_title {
   font-size: 18px;
   line-height: 25px;
-  background: #f3c300;
+  background: blue;
   text-align: center;
   color: #fff;
   padding: 8px 0px;

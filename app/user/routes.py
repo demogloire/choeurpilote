@@ -11,7 +11,12 @@ from . import user
 @user.route('/ajouteruti', methods=['GET', 'POST'])
 #@login_required
 def ajuser():
+       
+
+   if current_user.role!='Admin':
+      return redirect(url_for('main.dashboard'))
    #Formulaire de service
+   
    form=AjouteruserForm()
    #ENregfistrement des operations
    if form.validate_on_submit():
@@ -44,17 +49,16 @@ def liuser():
 #@login_required
 def statutuser(user_id):
    #Titre
-   title='Utilisateur | Kivu Exchange'
+   title='Utilisateur | Choeur pilote'
    #Requête de vérification de l'utilisateur
    user_statu=User.query.filter_by(id=user_id).first()
 
-   #La modification du mot de passe par l'administrateur.
-   # if current_user.role!='Admin':
-   #    return redirect(url_for('main.dashboard'))
    
-   #La modification du mot de passe par l'administrateur.
-   # if current_user.id== user_statu.id:
-   #    return redirect(url_for('user.liuser'))
+   if current_user.role!='Admin':
+      return redirect(url_for('main.dashboard'))
+   
+   if current_user.id== user_statu.id:
+      return redirect(url_for('user.liuser'))
    
    if user_statu is None:
       return redirect(url_for('user.liuser'))
@@ -82,13 +86,9 @@ def compositeur(user_id):
    user_statu=User.query.filter_by(id=user_id).first()
 
    #La modification du mot de passe par l'administrateur.
-   # if current_user.role!='Admin':
-   #    return redirect(url_for('main.dashboard'))
-   
-   #La modification du mot de passe par l'administrateur.
-   # if current_user.id== user_statu.id:
-   #    return redirect(url_for('user.liuser'))
-   
+   if current_user.role!='Admin':
+      return redirect(url_for('main.dashboard'))
+      
    if user_statu is None:
       return redirect(url_for('user.liuser'))
 
@@ -112,10 +112,7 @@ def compositeur(user_id):
 #@login_required
 def passuser(user_id):
    
-   #La modification du mot de passe par l'administrateur.
-   # if current_user.role!='Admin':
-   #    return redirect(url_for('main.dashboard'))
-          
+  
    form=PassuserForm()
 
    #Requête de vérification de l'utilisateur
@@ -125,6 +122,10 @@ def passuser(user_id):
 
    user_nom=user_pass.prenom
 
+   #Autorisation personnelle
+   if current_user.id!= user_statu.id:
+      return redirect(url_for('user.liuser'))
+
    if user_pass is None:
       return redirect(url_for('user.liuser'))
 
@@ -132,7 +133,7 @@ def passuser(user_id):
       password_hash=bcrypt.generate_password_hash(form.password.data).decode('utf-8')
       user_pass.password=password_hash
       db.session.commit()
-      #return redirect(url_for('auth.logout')) 
+      return redirect(url_for('auth.logout')) 
 
    return render_template('user/password.html', form=form, title=title, user_nom=user_nom)
 
@@ -156,8 +157,8 @@ def edituser(user_id):
       return redirect(url_for('user.liuser'))
    
    #La modification des informations de l'utilisateur.
-   # if current_user.id is not user_pass.id:
-   #    return redirect(url_for('main.dashboard'))
+   if current_user.id is not user_pass.id or current_user.role !='Admin':
+      return redirect(url_for('main.dashboard'))
 
    if form.validate_on_submit():
       if form.ed_username.data == user_pass.username:

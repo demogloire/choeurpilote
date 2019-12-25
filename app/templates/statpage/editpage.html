@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="col-lg-12 col-md-12">
+    <div class="card box-shadow--4dp">
+        <div class="header">
+            <h4 class="title">Editer publication </h4>
+        </div>
+        <div class="content">
+                {% with messages= get_flashed_messages(with_categories=true) %}
+                {% if messages  %}
+                    {% for category, message in messages %}
+                        <div class="alert text-center alert-{{ category }}">
+                            <b>{{ message }}</b>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <form method="POST" enctype="multipart/form-data" >
+                    {{ form.csrf_token }}
+     
+                    <div class="row">
+                        <div class="col-md-12">
+                                <div class="form-group">
+                                        <label>Titre de la page</label>
+                                        {% if form.ed_titre.errors %}
+                                        {{ form.ed_titre(class="form-control border-input is-invalid")}}
+                                        <i class="form-group__bar"></i>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ed_titre.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.ed_titre(class="form-control border-input")}}
+                                        <i class="form-group__bar"></i>
+                                        {% endif %}
+                                </div>
+                        </div> 
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-12">
+                                <div class="form-group">
+                                        <label>Contenue</label>
+                                        {% if form.ed_contenu.errors %}
+                                        {{ form.ed_contenu(rows="20", class="form-control border-input")}}
+                                        <i class="form-group__bar"></i>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.ed_contenu.errors %}
+                                                <span>{{ error }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                        {{ form.ed_contenu(rows="20", class="form-control border-input")}}
+                                        <i class="form-group__bar"></i>
+                                        {% endif %}
+                                </div>
+                        </div> 
+                    </div>
+      
+                    <div class="text-center">
+                            <button class="btn btn-outline-info btn-md" id="submit" name="submit" type="submit">
+                                    <i class="ti-receipt"></i> Modification de la page
+                            </button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

@@ -43,6 +43,7 @@ class User(db.Model, UserMixin):
     avatar=db.Column(db.String(128), nullable=False, default='default.png')
     articles = db.relationship('Article', backref='user_article', lazy='dynamic')
     partitions = db.relationship('Partition', backref='user_partition', lazy='dynamic')
+    Statpages = db.relationship('Statpage', backref='user_pages', lazy='dynamic')
   
 
     def __repr__(self):
@@ -71,3 +72,28 @@ class Types(db.Model):
     def __repr__(self):
         return ' {} '.format(self.nom)
 
+class Statpage(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    titre = db.Column(db.String(128))
+    contenu = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return ' {} '.format(self.titre)
+
+
+class Album(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nom = db.Column(db.String(128))
+    statut = db.Column(db.Boolean, default=False)  
+    medias = db.relationship('Media', backref='album_media', lazy='dynamic')
+    def __repr__(self):
+        return ' {} '.format(self.nom)
+
+class Media(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    imagesurl=db.Column(db.String(200)) 
+    album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=False)
+
+    def __repr__(self):
+        return ' {} '.format(self.imagesurl)
