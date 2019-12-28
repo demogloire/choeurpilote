@@ -1,0 +1,28 @@
+<section class="breadcrumb_area">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle">
+                {% if rec.titre %}
+                {{ rec.titre }}
+                {% else %}
+                Comité du choeur
+                    
+                {% endif %}
+                
+                
+                </h2>
+            <ol class="breadcrumb">
+
+                <li>
+                    {% if rec.page %}
+                    {{ rec.page }}
+                    {% else %}
+                    <a href="#">A propos</a>
+                    {% endif %}
+                </li>
+                <li class="active">{{ rec.titre }}</li>
+            </ol>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,189 @@
+{% extends "autrespage.html" %}
+
+{% block body %}
+
+    <section class="blog_area section_gap">
+        <div class="container">
+            <div class="hotel_booking_area position">
+                <div class="container">
+                    <div class="hotel_booking_table_b">
+                        
+                        <div class="col-md-12">
+                            <div class="boking_table">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="book_tabel_item">
+                                            <form  method="POST" enctype="multipart/form-data">
+                                                {{ form.csrf_token }}
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label class="text_blog">Chant:</label>
+                                                        <div class="input-group">
+                                                        {% if form.partition.errors %}
+                                                        {{ form.partition(class="wide", style="display: none")}}
+                                                        <i class="form-group__bar"></i>
+                                                        <div class="invalid-feedback">
+                                                            {% for error in form.partition.errors %}
+                                                                <span>{{ error }}</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                        {% else %}
+                                                        {{ form.partition(class="wide", style="display: none")}}
+                                                        <i class="form-group__bar"></i>
+                                                        {% endif %}
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label class="text_blog">Mise en ligne par:</label>
+                                                        <div class="input-group">
+                                                        {% if form.user_comp.errors %}
+                                                        {{ form.user_comp(class="wide", style="display: none")}}
+                                                        <i class="form-group__bar"></i>
+                                                        <div class="invalid-feedback">
+                                                            {% for error in form.user_comp.errors %}
+                                                                <span>{{ error }}</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                        {% else %}
+                                                        {{ form.user_comp(class="wide", style="display: none")}}
+                                                        <i class="form-group__bar"></i>
+                                                        {% endif %}
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label class="text_blog">Type de chant:</label>
+                                                        <div class="input-group">
+                                                        {% if form.types_part.errors %}
+                                                        {{ form.types_part(class="wide", style="display: none")}}
+                                                        <i class="form-group__bar"></i>
+                                                        <div class="invalid-feedback">
+                                                            {% for error in form.types_part.errors %}
+                                                                <span>{{ error }}</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                        {% else %}
+                                                        {{ form.types_part(class="wide", style="display: none")}}
+                                                        <i class="form-group__bar"></i>
+                                                        {% endif %}
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for=""></label>
+                                                    <button class="book_now_btn info button_hover" id="submit" name="submit" type="submit">
+                                                        Chercher les partitions
+                                                    </button>
+                                                    
+                                                </div>
+                                            </div>
+                                            </form>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<section class="blog_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                {% if nbr_part=='Vide' %}
+
+                <div class="col-md-12" style="margin-top: 100px; margin-bottom: 100px;">
+                    {% with messages= get_flashed_messages(with_categories=true) %}
+                    {% if messages  %}
+                        {% for category, message in messages %}
+                            <div class="alert text-center alert-{{ category }}">
+                                <b class="title_color">{{ message }}</b>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                 </div> 
+
+                {% else %}    
+                
+                <p> <small>*Les partitions mise en ligne par les compositeurs du choeur pilote comme ceux qui sont affiliés à la plateforme de publication, leurs partitions sont soumises au droit d'auteur.</i></small> </p>                                                                                      
+                
+                
+                <div class="table-responsive">          
+                <table class="table">
+                  
+                    
+                    {% for partition in partitions.items%}
+                    <tr>
+                      <td>{{partition.titre_parti}}  <span class="badge badge-primary">{{partition.type_partition.nom}} ({{partition.user_partition.prenom}})</span></td>
+                      <td class="text-right"> <a target="blank" href="{{ url_for('siteweb.telecharger', part_id=partition.id)}}" class="genric-btn danger small circle arrow"> <i class="lnr lnr-download"></i> <span class="badge badge-info">{{partition.nbr_download}} </span> Télécharger </a> </td>
+                    </tr>
+                    {% endfor %}
+                    
+                </table>
+                </div>
+
+
+               
+
+                {% endif %}
+
+            <nav class="blog-pagination justify-content-center d-flex">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a href="#" class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">
+                                        <span class="lnr lnr-chevron-left"></span>
+                                    </span>
+                                </a>
+                            </li>
+                            {% for page_num in partitions.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                            {% if page_num %}
+                                {% if partitions.page==page_num %}
+                                <li class="page-item"><a href="{{ url_for('siteweb.partition', page=page_num) }}" class="page-link">{{ page_num}}</a></li>
+                                    
+                                {% else %}
+                                <li class="page-item"><a href="{{ url_for('siteweb.parition', page=page_num) }}" class="page-link">{{ page_num}}</a></li>
+                                    
+                                {% endif %}
+                            {% else %}
+                                ...
+                            {% endif %}
+                            {% endfor %}
+                            
+                            <li class="page-item">
+                                <a href="#" class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">
+                                        <span class="lnr lnr-chevron-right"></span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+            </nav>                
+                          
+                          
+                   
+                
+            </div>
+    
+
+            <div class="col-lg-4">
+                {% include 'sidebar/sidebarpartition.html' %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area =================-->
+
+{% endblock body %}

@@ -58,7 +58,7 @@
     
 }
 .hotel_booking_table{
-    background: #04091e;
+    background: #d9e4dc;
     align-items: center;
     padding: 40px 50px 30px;
 	display: flex;
@@ -69,6 +69,20 @@
         text-transform: uppercase;
     }
 }
+
+.hotel_booking_table_b{
+    background:black;
+    align-items: center;
+    padding: 40px 50px 30px;
+	display: flex;
+    h2{
+        font-size: 24px;
+        line-height: 30px;
+        color: #fff;
+        text-transform: uppercase;
+    }
+}
+
 .boking_table{
     margin-left: -50px;
 }

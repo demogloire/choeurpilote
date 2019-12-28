@@ -556,7 +556,7 @@ button:focus {
 
 /*============= End banner_area css =============*/
 .hotel_booking_table {
-  background: #04091e;
+  background: #298cdf;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -592,24 +592,24 @@ button:focus {
   font-size: 13px;
   line-height: 38px;
   padding: 0px 20px;
-  color: #777777;
+  color:black;
   z-index: 0;
 }
 
 .book_tabel_item .form-group .input-group .form-control.placeholder {
-  color: #777777;
+  color:black;
 }
 
 .book_tabel_item .form-group .input-group .form-control:-moz-placeholder {
-  color: #777777;
+  color:black;
 }
 
 .book_tabel_item .form-group .input-group .form-control::-moz-placeholder {
-  color: #777777;
+  color:black;
 }
 
 .book_tabel_item .form-group .input-group .form-control::-webkit-input-placeholder {
-  color: #777777;
+  color:black;
 }
 
 .book_tabel_item .form-group .input-group .form-control:focus {
@@ -643,7 +643,7 @@ button:focus {
   font-size: 13px;
   line-height: 40px;
   height: 40px;
-  color: #777;
+  color:black;
 }
 
 .book_tabel_item .nice-select:after {
@@ -1202,6 +1202,17 @@ button:focus {
   font-size: 18px;
   line-height: 25px;
   background: blue;
+  text-align: center;
+  color: #fff;
+  padding: 8px 0px;
+  margin-bottom: 30px;
+}
+
+
+.blog_right_sidebar .widget_title_b {
+  font-size: 18px;
+  line-height: 25px;
+  background: yellowgreen;
   text-align: center;
   color: #fff;
   padding: 8px 0px;
@@ -3646,3 +3657,10 @@ h1, h2, h3, h4, h5, h6 {
 .section_gape {
   padding: 80px 0;
 }
+
+.text_blog{
+  color:black;
+}
+
+
+

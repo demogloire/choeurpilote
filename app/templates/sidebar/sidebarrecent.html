@@ -1,0 +1,21 @@
+
+	<aside class="single_sidebar_widget post_category_widget">
+		<h4 class="widget_title_b">10 partitions recentes</h4>
+		<ul class="list_style cat-list">
+			{% for download in plus_telecharger%}
+			<li>
+				<a  target="blank" href="{{ url_for('siteweb.telecharger', part_id=download.id)}}" class="d-flex justify-content-between">
+					<p>{{download.titre_parti}}  <span class="badge badge-info">{{download.type_partition.nom}} ({{download.user_partition.prenom}})
+
+					</span></p>
+					
+				</a>
+			</li>
+
+			{% endfor %}
+		
+														
+		</ul>
+		
+	</aside>
+	

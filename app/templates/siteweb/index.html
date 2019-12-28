@@ -121,7 +121,7 @@
                             <a href="#">{{ donnees.categorie_article.nom }} </a> de {{ donnees.user_article.prenom }} 
                         </div>
                         <a href="#"><h4 class="sec_h4">{{donnees.titre}}</h4></a>
-                        <p class="text-justify">{{ donnees.resume | truncate(150) }}   </p>
+                        <p class="text-justify">{{ donnees.resume | truncate(150)|markdown }}   </p>
                         <h6 class="date title_color">Publier le {{ donnees.date_pub.strftime('%d - %m - %Y') }}</h6>
                     </div>
                     <a href="#" class="button_hover tag_btn">Lire la suite </a>	

@@ -212,7 +212,7 @@ def mediaaled(cate_id):
          db.session.add(enre_media)
          db.session.commit()
          flash("Vous avez ajouté une image dans votre album", "success")
-         return redirect(url_for('album.mediaaled')) 
+         return redirect(url_for('album.mediaaled', cate_id=cate_id)) 
          
 
    return render_template('album/ulpload_imgc.html',nom_album=nom_album,  title=title, form=form)

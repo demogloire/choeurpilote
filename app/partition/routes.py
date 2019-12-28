@@ -66,6 +66,7 @@ def telechargement(part_id):
    #Partition
    if part_li is None:
       return redirect(url_for('partition.lipuart'))
+      
    return redirect(part_li.pdf_url)
 
 """ Statut de la partition """

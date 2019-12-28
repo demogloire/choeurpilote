@@ -1,0 +1,95 @@
+{% extends "autrespage.html" %}
+
+{% block body %}
+
+<section class="accomodation_area section_gap">
+    <div class="container">
+        <div class="hotel_booking_area position">
+            <div class="container">
+                <div class="hotel_booking_table">
+                    
+                    <div class="col-md-12">
+                        <div class="boking_table">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="book_tabel_item">
+                                        <form  method="POST" enctype="multipart/form-data">
+                                            {{ form.csrf_token }}
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                    {% if form.cate_pub.errors %}
+                                                    {{ form.cate_pub(class="wide", style="display: none")}}
+                                                    <i class="form-group__bar"></i>
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form.cate_pub.errors %}
+                                                            <span>{{ error }}</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                    {% else %}
+                                                    {{ form.cate_pub(class="wide", style="display: none")}}
+                                                    <i class="form-group__bar"></i>
+                                                    {% endif %}
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="book_now_btn button_hover" id="submit" name="submit" type="submit">
+                                                    Chercher un album
+                                                </button>
+                                                
+                                            </div>
+                                        </div>
+                                        </form>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ Accomodation Area  =================-->
+
+<!--================Breadcrumb Area =================-->
+<section class="gallery_area section_gap">
+    <div class="container"> 
+
+        {% if var_photo=='Vide' %}
+         <div class="row imageGallery1" id="gallery">
+             <div class="col-md-12" style="margin-top: 100px; margin-bottom: 100px;">
+                {% with messages= get_flashed_messages(with_categories=true) %}
+                {% if messages  %}
+                    {% for category, message in messages %}
+                        <div class="alert text-center alert-{{ category }}">
+                            <b class="title_color">{{ message }}</b>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+             </div> 
+         </div>
+        {% else %}    
+        <div class="row imageGallery1" id="gallery">
+            {% for leimage in lesimages %}
+                <div class="col-md-4 gallery_item">
+                    <div class="gallery_img">
+                        <img src="{{leimage.imagesurl}}" alt="">
+                        <div class="hover">
+                            <a class="light" href="{{leimage.imagesurl}}"><i class="fa fa-expand"></i></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}  
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+<!--================Blog Area =================-->
+
+{% endblock body %}

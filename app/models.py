@@ -27,6 +27,7 @@ class Article(db.Model):
     imagesurl=db.Column(db.String(200))
     document_pdf=db.Column(db.String(200))
     date_pub=db.Column(db.DateTime, nullable=False, default=datetime.utcnow )
+    nbr_lecture= db.Column(db.Integer, default=0)
     def __repr__(self):
         return ' {} '.format(self.titre)
 

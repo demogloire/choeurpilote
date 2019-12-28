@@ -150,6 +150,11 @@ def editpub(pub_id):
    title='Publication'
    #Requête de vérification des articles
    pub_class=Article.query.filter_by(id=pub_id).first()
+
+   #Les variables
+   img_upload_result=None
+   upload_result=None
+
    if pub_class is None:
       return redirect(url_for('publication.lipub'))
    if form.validate_on_submit(): 
@@ -177,7 +182,7 @@ def editpub(pub_id):
          pub_class.document_pdf=pdf_download
          pub_class.imagesurl=img_download
 
-      elif form.ed_document_pu.data :
+      elif form.ed_document_pu.data is not None :
          file_to_upload=form.ed_document_pu.data
          if file_to_upload:
             try:
@@ -187,7 +192,7 @@ def editpub(pub_id):
          pdf_download=upload_result['url'] # Mise en route du fichier pdf
          pub_class.document_pdf=pdf_download
       
-      elif form.ed_document_img.data :
+      elif form.ed_document_img.data is not None :
          img_file_to_upload=form.ed_document_img.data
          
          if img_file_to_upload:

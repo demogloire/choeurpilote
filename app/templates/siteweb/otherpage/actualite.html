@@ -1,0 +1,127 @@
+{% extends "autrespage.html" %}
+
+{% block body %}
+<!--================Blog Area =================-->
+<section class="blog_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="blog_left_sidebar">
+                    {% for listes in liste.items %}
+                    <a href="{{ url_for('siteweb.postactualite', slug_id=listes.slug,  post_id=listes.id)}}">
+
+                        <article class="row blog_item">
+                            <div class="col-md-3">
+                                <div class="blog_info text-right">
+                                     <ul class="blog_meta list_style">
+                                         <li><a href="#">{{ listes.user_article.prenom }}<i class="lnr lnr-user"></i></a></li>
+                                         <li><a href="#">{{ listes.date_pub.strftime('%d-%m-%Y') }}<i class="lnr lnr-calendar-full"></i></a></li>
+                                         <li><a href="#">
+                                             {% if listes.nbr_lecture==None%}
+                                             0
+                                             {% else %}
+                                             {{ listes.nbr_lecture }} 
+                                             {%endif%}
+                                            
+                                            <i class="lnr lnr-eye"></i></a></li>
+                                         
+                                     </ul>
+                                 </div>
+                            </div>
+                             <div class="col-md-9">
+                                 <div class="blog_post">
+                                     {% if listes.imagesurl==None %}
+                                     {% else %}
+                                        <img width="555px" height="280px" src=" {{ listes.imagesurl }} " alt="CPPCU">
+                                     {% endif %}
+                                     <div class="blog_details">
+                                         <a href="{{ url_for('siteweb.postactualite', slug_id=listes.slug,  post_id=listes.id)}}"><h2> {{listes.titre}} </h2></a>
+                                         <p>{{ listes.resume | truncate(200)|markdown }} </p>
+                                         <a href="{{ url_for('siteweb.postactualite', slug_id=listes.slug, post_id=listes.id)}}" class="view_btn button_hover">Lire la suite</a>
+                                     </div>
+                                 </div>
+                             </div>
+                         </article>
+
+                    </a>
+                    
+                    
+                    {% endfor %}
+                    
+                  
+                    <nav class="blog-pagination justify-content-center d-flex">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a href="#" class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">
+                                        <span class="lnr lnr-chevron-left"></span>
+                                    </span>
+                                </a>
+                            </li>
+                            {% for page_num in liste.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                            {% if page_num %}
+                                {% if liste.page==page_num %}
+                                <li class="page-item"><a href="{{ url_for('siteweb.actualite', page=page_num) }}" class="page-link">{{ page_num}}</a></li>
+                                    
+                                {% else %}
+                                <li class="page-item"><a href="{{ url_for('siteweb.actualite', page=page_num) }}" class="page-link">{{ page_num}}</a></li>
+                                    
+                                {% endif %}
+                            {% else %}
+                                ...
+                            {% endif %}
+                            {% endfor %}
+                            
+                            <li class="page-item">
+                                <a href="#" class="page-link" aria-label="Next">
+                                    <span aria-hidden="true">
+                                        <span class="lnr lnr-chevron-right"></span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+            </nav>                
+                      
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget search_widget">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Chercher un article">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+                            </span>
+                        </div><!-- /input-group -->
+                        <div class="br"></div>
+                    </aside>
+                    {% include 'sidebar/sidebarpost.html' %}
+
+                    {% include 'sidebar/sidebarrecent.html' %}
+                    <br><br>
+                    <aside class="single-sidebar-widget newsletter_widget">
+                        <h4 class="widget_title">Newsletter</h4>
+                        <p class="text-justify">
+                            Pour suivre les nouvelles du Choeur Pilote des Patits Chanteursd'Uvira, Abonnez-vous. 
+                        </p>
+                        <div class="form-group d-flex flex-row">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                </div>
+                                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email'">
+                            </div>
+                            <a href="#" class="bbtns">Abonnez</a>
+                        </div>	
+                        	
+                        <div class="br"></div>							
+                    </aside>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area =================-->
+
+{% endblock body %}
