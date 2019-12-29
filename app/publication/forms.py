@@ -24,3 +24,12 @@ class EditPForm(FlaskForm):
     ed_document_img = FileField('Image', validators=[FileAllowed(['jpg'],'Seul jpg est autorisé')])
     ed_cate_pub= QuerySelectField(query_factory=rech_cat, get_label='nom', allow_blank=False)
     submit = SubmitField('Publier')
+
+class AjoutPIForm(FlaskForm):
+    file = FileField('Image', validators=[FileAllowed(['jpg'],'Seul jpg est autorisé')])
+    submit = SubmitField('Publier')
+
+class AjoutPPForm(FlaskForm):
+    file = FileField('Image', validators=[FileAllowed(['pdf'],'Seul jpg est autorisé')])
+    submit = SubmitField('Publier')
+

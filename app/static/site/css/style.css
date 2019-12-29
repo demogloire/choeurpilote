@@ -678,6 +678,11 @@ button:focus {
   z-index: -1;
 }
 
+.breadcrumb_area_partition .bg-parallax {
+  background: url("../image/about_banner.jpg") no-repeat scroll center 0/cover;
+  opacity: 0.50;
+  z-index: -1;
+}
 .page-cover-tittle {
   display: block;
   font-size: 36px;

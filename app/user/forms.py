@@ -15,7 +15,7 @@ class AjouteruserForm(FlaskForm):
     prenom= StringField('Prénom', validators=[DataRequired("Completer nom"),  Length(min=4, max=32, message="Veuillez respecté les caractères")])
     username= StringField('Email', validators=[DataRequired('Veuillez completer votre email'), Email('Votre email est incorrect')])
     password= PasswordField('Mot de passe', validators=[DataRequired('Veuillez completer votre mot de passe')])
-    role= SelectField('Rôle',choices=[('Admin', 'Admin'), ('Webmaster', 'Webmaster')])
+    role= SelectField('Rôle',choices=[('Admin', 'Admin'), ('Webmaster', 'Webmaster'),  ('Compositeur', 'Compositeur')])
     submit = SubmitField('Créer compte')
 
     #Fornction de verification d'unique existenace dans la base des données
@@ -29,7 +29,7 @@ class EditeruserForm(FlaskForm):
     ed_post_nom= StringField('Post-nom', validators=[DataRequired("Completer nom"),  Length(min=4, max=32, message="Veuillez respecté les caractères")])
     ed_prenom= StringField('Prénom', validators=[DataRequired("Completer nom"),  Length(min=4, max=32, message="Veuillez respecté les caractères")])
     ed_username= StringField('Email', validators=[DataRequired('Veuillez completer votre email'), Email('Votre email est incorrect')])
-    ed_role= SelectField('Rôle',choices=[('Admin', 'Admin'), ('Webmaster', 'Webmaster')])
+    ed_role= SelectField('Rôle',choices=[('Admin', 'Admin'), ('Webmaster', 'Webmaster'), ('Compositeur', 'Compositeur')])
     ed_submit = SubmitField('Créer compte')
 
 

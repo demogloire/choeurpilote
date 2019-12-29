@@ -1,0 +1,59 @@
+{% extends "autrespage.html" %}
+
+{% block body %}
+
+
+        <!--================Contact Area =================-->
+        <section class="contact_area section_gap">
+            <div class="container">
+
+                <div class="row" style="margin-top: 100px; margin-bottom: 100px;">
+                    <div class="col-md-3">
+                        <div class="contact_info">
+                            <div class="info_item">
+                                <i class="lnr lnr-home"></i>
+                                <h6>Uvira,Sud-Kivu (RDC)</h6>
+                                <p>Ville d'Uvira,  Commune de Mulogwe, Av. Mwengwa No 1</p>
+                            </div>
+                            <div class="info_item">
+                                <i class="lnr lnr-phone-handset"></i>
+                                <h6><a href="#">+243 997698884</a></h6>
+                                <p>Répitition: Dimache à 15h00</p>
+                            </div>
+                            <div class="info_item">
+                                <i class="lnr lnr-envelope"></i>
+                                <h6><a href="#">info@choeurpilotepcu.com</a></h6>
+                                <p>Contactez-nous n'importe quel moment!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <form class="row contact_form"  method="post" id="contactForm" novalidate="novalidate">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Votre nom">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Votre E-mail">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="L'objet de votre message">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="message" id="message" rows="1" placeholder="Votre message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-right">
+                                <button type="submit" value="submit" class="btn theme_btn button_hover">Envoyer votre message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================Contact Area =================-->
+        
+
+{% endblock %}

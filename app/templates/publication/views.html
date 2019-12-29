@@ -9,8 +9,12 @@
             <h4 class="title">Les publications sur la plateforme</h4>
             <br>
             <a href="{{ url_for('publication.ajouterpub')}}" class="btn btn-primary"> <i class="ti-receipt "></i> Ajouter publication </a>
+            <p></p>
+                <small>* I: Modification de l'image de l'article, P: Modification de PDF de l'article </small>
+            </p>
         </div>
         <br>
+        
        
         {% with messages= get_flashed_messages(with_categories=true) %}
             {% if messages  %}
@@ -30,16 +34,18 @@
                             <th>Titre de la publication</th>
                             <th class="text-center">Catégorie</th>
                             <th class="text-center">Utilisateur</th>
+                            <th class="text-center">MAJ fichier</th>
                             <th  class="text-center">Statut</th>
                             <th  class="text-center">Action</th>
                         {% else %}
                             <th>Titre de la publication</th>
                             <th class="text-center">Catégorie</th>
+                            <th class="text-center">MAJ fichier</th>
                             <th  class="text-center">Statut sur plateforme</th>
                             <th  class="text-center">Action</th>
                         {% endif%}
                     
-
+                        
                 </tr></thead>
                 <tbody>
                     {% for listes in liste.items%}
@@ -48,6 +54,12 @@
                                 <td> {{ listes.titre }} </td>
                                 <td class="text-center"> {{ listes.categorie_article.nom }} </td>
                                 <td class="text-center"> {{ listes.user_article.prenom }} </td>
+                                <td  class="text-center"> 
+                                    <a data-toggle="popover" data-trigger="hover" data-content="Supprimer" href="{{ url_for('publication.modpubimg', cate_id=listes.id)}}" class="btn btn-sm btn-info"> I </a> 
+                                    <a data-toggle="popover" data-trigger="hover" data-content="Supprimer" href="{{ url_for('publication.modpubpdf', cate_id=listes.id)}}" class="btn btn-sm btn-primary"> P </a> 
+                                
+                                </td>
+    
                                 {% if listes.statut==True%}
                                 <td  class="text-center"><a href=" {{ url_for('publication.statutpub', pub_id=listes.id)}} " class="btn btn-success"> <i class="ti-unlock"></i> </a></td>
                                 {% else %}
@@ -65,6 +77,11 @@
                             <tr>
                                 <td> {{ listes.titre }} </td>
                                 <td class="text-center"> {{ listes.categorie_article.nom }} </td>
+                                <td  class="text-center"> 
+                                    <a data-toggle="popover" data-trigger="hover" data-content="Supprimer" href="{{ url_for('publication.modpubimg', cate_id=listes.id)}}" class="btn btn-sm btn-info"> I </a> 
+                                    <a data-toggle="popover" data-trigger="hover" data-content="Supprimer" href="{{ url_for('publication.modpubpdf', cate_id=listes.id)}}" class="btn btn-sm btn-primary"> P </a> 
+                                
+                                </td>
                                 {% if listes.statut==True%}
                                 <td  class="text-center"><a href="" class="btn btn-success"> <i class="ti-unlock"></i> </a></td>
                                 {% else %}

@@ -58,7 +58,7 @@ __pycache__/
 
 # # Flask stuff:
 #instance/
-migration/
+migrations/
 # .webassets-cache
 
 # # Scrapy stuff:

@@ -292,3 +292,16 @@ def postactualite(slug_id,post_id):
    return render_template('siteweb/otherpage/article.html',plus_artic=plus_artic, rec=rec, title=title, plus_telecharger=plus_telecharger, nos_images=nos_images, actualite=actualite)
 
 
+
+@siteweb.route('/contact.html', methods=['GET', 'POST'])
+def contact():
+   title="Contactez - nous | Choeur pilote"
+
+  
+   #Les partitions les precement mise en ligne
+   plus_telecharger=Partition.query.filter_by(statut=True).order_by(Partition.id.asc()).limit(10)
+   #Les partitions plus populaire
+   plus_artic=Article.query.filter(Article.nbr_lecture >=5).limit(5)
+   nos_images=nosimage()
+   rec={'titre':'Contactez-nous', 'page':'Nos coordonées'}
+   return render_template('siteweb/otherpage/contact.html',plus_artic=plus_artic, rec=rec, title=title, plus_telecharger=plus_telecharger, nos_images=nos_images)

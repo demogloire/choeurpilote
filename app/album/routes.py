@@ -206,6 +206,7 @@ def mediaaled(cate_id):
                upload_result = upload(img_file_to_upload)
             except:
                flash("Erreur de connexion",'danger')
+               return redirect(url_for('album.mediaaled', cate_id=cate_id)) 
          img_download=upload_result['url'] # Mise en route du fichier jpg
          #Enregistrement des informations dans la base des données
          enre_media=Media(imagesurl=img_download, album_id=cate_id)

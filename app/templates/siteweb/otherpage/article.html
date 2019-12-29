@@ -44,7 +44,7 @@
                         {% if actualite.document_pdf ==None %}
                         {% else %}
                             <p>
-                                <a target="blank" class="btn btn-danger" href="actualite.document_pdf"><i class="lnr lnr-download"></i> Télécharger le PDF</a>
+                                <a target="blank" class="btn btn-danger" href=" {{ actualite.document_pdf }} "><i class="lnr lnr-download"></i> Télécharger le PDF</a>
                             </p>
                         {% endif %}
                         

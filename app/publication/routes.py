@@ -1,7 +1,7 @@
 from flask import render_template, flash, url_for, redirect, request, session
 from .. import db, bcrypt
 from ..models import User, Article 
-from app.publication.forms import AjoutPForm, EditPForm
+from app.publication.forms import AjoutPForm, EditPForm, AjoutPIForm, AjoutPPForm
 from flask_login import login_user, current_user, logout_user, login_required
 from slugify import slugify, Slugify, UniqueSlugify
 from sqlalchemy.sql import func
@@ -150,7 +150,6 @@ def editpub(pub_id):
    title='Publication'
    #Requête de vérification des articles
    pub_class=Article.query.filter_by(id=pub_id).first()
-
    #Les variables
    img_upload_result=None
    upload_result=None
@@ -162,47 +161,6 @@ def editpub(pub_id):
       titre_slugify = Slugify(to_lower=True) #Slug
       titre=titre_slugify(form.ed_titre.data)
       #gestion des documents transmis
-      if form.ed_document_pu.data and form.ed_document_img.data :
-         file_to_upload=form.ed_document_pu.data
-         img_file_to_upload=form.ed_document_img.data
-
-         if file_to_upload:
-            try:
-               upload_result = upload(file_to_upload)
-            except:
-               flash("Erreur de connexion",'danger')
-                  
-         if img_file_to_upload:
-            try:
-               img_upload_result = upload(file_to_upload)
-            except:
-               flash("Erreur de connexion",'danger')
-         pdf_download=upload_result['url'] # Mise en route du fichier pdf
-         img_download=img_upload_result['url'] # Mise en route du fichier img
-         pub_class.document_pdf=pdf_download
-         pub_class.imagesurl=img_download
-
-      elif form.ed_document_pu.data is not None :
-         file_to_upload=form.ed_document_pu.data
-         if file_to_upload:
-            try:
-               upload_result = upload(file_to_upload)
-            except:
-               flash("Erreur de connexion",'danger')
-         pdf_download=upload_result['url'] # Mise en route du fichier pdf
-         pub_class.document_pdf=pdf_download
-      
-      elif form.ed_document_img.data is not None :
-         img_file_to_upload=form.ed_document_img.data
-         
-         if img_file_to_upload:
-            try:
-               img_upload_result = upload(file_to_upload)
-            except:
-               flash("Erreur de connexion",'danger')
-         img_download=img_upload_result['url'] # Mise en route du fichier img
-         pub_class.imagesurl=img_download
-
       pub_class.titre=form.ed_titre.data.capitalize()
       pub_class.slug=titre
       pub_class.resume=form.ed_resume.data
@@ -217,3 +175,89 @@ def editpub(pub_id):
       form.ed_cate_pub.data=pub_class.categorie_article.nom
    return render_template('publication/editpub.html', form=form, title=title)
 
+
+
+@publication.route('/image_mod_img/<int:cate_id>', methods=['GET', 'POST'])
+@login_required
+def modpubimg(cate_id):
+   #autorisation par l'administrateur.
+   if current_user.compositeur == True  and current_user.role=='Compositeur':
+      return redirect(url_for('main.dashboard'))
+
+   #Titre 
+   title="Image publication | Choeur Pilote"
+   #formulaire
+   form=AjoutPIForm()
+
+   upload_result=None
+
+   pub_class=Article.query.filter_by(id=cate_id).first_or_404()
+   #De nom de l'album
+   nom_album=pub_class.titre
+   #Le nom du type encours de modification
+   if pub_class is None:
+      return redirect(url_for('publication.lipub'))
+
+   if form.validate_on_submit():
+      if form.file.data:
+         img_file_to_upload=form.file.data
+
+         if img_file_to_upload:
+            try:
+               upload_result = upload(img_file_to_upload)
+            except:
+               flash("Erreur de connexion",'danger')
+               return redirect(url_for('publication.modpubimg', cate_id=cate_id))
+         img_download=upload_result['url'] # Mise en route du fichier jpg
+         #Enregistrement des informations dans la base des données
+         pub_class.imagesurl=img_download   
+         db.session.commit()
+         flash("Mise à jour avec succès", "success")
+         return redirect(url_for('publication.lipub')) 
+         
+
+   return render_template('publication/ulpload_img.html',nom_album=nom_album,  title=title, form=form)
+
+   
+@publication.route('/image_mod_pdf/<int:cate_id>', methods=['GET', 'POST'])
+@login_required
+def modpubpdf(cate_id):
+   #autorisation par l'administrateur.
+   if current_user.compositeur == True  and current_user.role=='Compositeur':
+      return redirect(url_for('main.dashboard'))
+
+   #Titre 
+   title="PDF de la publication | Choeur Pilote"
+   #formulaire
+   form=AjoutPPForm()
+
+   upload_result=None
+
+   pub_class=Article.query.filter_by(id=cate_id).first_or_404()
+   #De nom de l'album
+   nom_album=pub_class.titre
+   #Le nom du type encours de modification
+   if pub_class is None:
+      return redirect(url_for('publication.lipub'))
+
+   if form.validate_on_submit():
+      if form.file.data:
+         img_file_to_upload=form.file.data
+
+         if img_file_to_upload:
+            try:
+               upload_result = upload(img_file_to_upload)
+            except:
+               flash("Erreur de connexion",'danger')
+               return redirect(url_for('publication.modpubimg', cate_id=cate_id))
+         img_download=upload_result['url'] # Mise en route du fichier jpg
+         #Enregistrement des informations dans la base des données
+         pub_class.document_pdf=img_download   
+         db.session.commit()
+         flash("Mise à jour avec succès", "success")
+         return redirect(url_for('publication.lipub')) 
+         
+
+   return render_template('publication/ulpload_pdf.html',nom_album=nom_album,  title=title, form=form)
+
+   
