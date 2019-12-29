@@ -4,6 +4,11 @@
 <div class="sufee-login d-flex align-content-center flex-wrap">
     <div class="container">
         <div class="login-content" style="margin-top:150px" >
+            <div class="login-logo">
+                <a href="index.html">
+                    <img class="align-content" height="120px" width="100px" src="{{ url_for('static',filename='logo/cppcu.png')}}" alt="">
+                </a>
+            </div>
             <div class="login-form">
                     {% with messages= get_flashed_messages(with_categories=true) %}
                     {% if messages  %}

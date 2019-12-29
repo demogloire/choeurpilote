@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -49,6 +49,24 @@ def create_app(config_name):
     ''' 
     Utilisation des stucture Blueprint
     '''
+
+    @app.errorhandler(403)
+    def forbidden(error):
+        rec={'titre':'Erreur 403', 'page':'Forbidden'}
+        return render_template('errors/403.html', title='Forbidden', rec=rec), 403
+
+    @app.errorhandler(404)
+    def page_not_found(error):
+        rec={'titre':'Erreur 404', 'page':'Page non trouvée'}
+        return render_template('errors/404.html', title='Page non trouvée', rec=rec), 404
+
+    @app.errorhandler(500)
+    def internal_server_error(error):
+        rec={'titre':'Erreur 505', 'page':'Erreur serveur'}
+        return render_template('errors/500.html', title='Erreur serveur'), 500
+
+
+
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
