@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -64,10 +64,8 @@ def create_app(config_name):
     def internal_server_error(error):
         rec={'titre':'Erreur 505', 'page':'Erreur serveur'}
         return render_template('errors/500.html', title='Erreur serveur'), 500
-
-
-
-
+    
+    
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
