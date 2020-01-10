@@ -30,6 +30,6 @@ class AjoutPIForm(FlaskForm):
     submit = SubmitField('Publier')
 
 class AjoutPPForm(FlaskForm):
-    file = FileField('Image', validators=[FileAllowed(['pdf'],'Seul jpg est autorisé')])
+    file = FileField('Image', validators=[FileAllowed(['pdf'],'Seul pdf est autorisé')])
     submit = SubmitField('Publier')
 
