@@ -8,6 +8,11 @@ from . import auth
 
 @auth.route('/login', methods=['GET','POST'])
 def login():
+       
+    ## Vérification de l'existence d'au moins un administrateur
+   ver_admini_existe= User.query.filter_by(statut=True, role="Admin").first()
+   if ver_admini_existe is None:
+      return redirect(url_for('user.ajouteruserad'))
 
    #Verification de l'authentification de l'utilisateur
    if current_user.is_authenticated:

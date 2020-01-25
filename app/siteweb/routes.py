@@ -6,20 +6,30 @@ from app.siteweb.forms import AlbumForm, PartForm
 from flask_login import login_user, current_user, logout_user, login_required
 from . import siteweb
 
-@siteweb.route('', methods=['GET', 'POST'])
+@siteweb.route('/', methods=['GET', 'POST'])
 def index():
    title='Bienvenue'
    
    #Triage selon les articles
    cat_id=Categorie.query.filter_by(nom='Article').first()
-   recent_pub=Article.query.filter_by(statut=True, categorie_id=cat_id.id).order_by(Article.id.desc()).limit(3)
-   #Triage selon les communiquées
-   comm_id=Categorie.query.filter_by(nom='Communiqué').first()
-   recent_communiqu=Article.query.filter_by(statut=True, categorie_id=comm_id.id).all()
-   #image de pieds de page
+
+   ver_post=None
+   recent_pub={}
+   comm_id={}
+   recent_communiqu={}
    nos_images=nosimage()
+
+   if cat_id is not None:
+      recent_pub=Article.query.filter_by(statut=True, categorie_id=cat_id.id).order_by(Article.id.desc()).limit(3)
+      #Triage selon les communiquées
+      comm_id=Categorie.query.filter_by(nom='Communiqué').first()
+      recent_communiqu=Article.query.filter_by(statut=True, categorie_id=comm_id.id).all()
+      #image de pieds de page
+      ver_post="Novide"
+   else:
+      ver_post="Vide"
      
-   return render_template('siteweb/index.html',nos_images=nos_images, title=title, rec=recent_pub, recm=recent_communiqu)
+   return render_template('siteweb/index.html',nos_images=nos_images, ver_post=ver_post, title=title, rec=recent_pub, recm=recent_communiqu)
 
 @siteweb.route('/quisommes-nous.html', methods=['GET', 'POST'])
 def quisommes():
@@ -223,7 +233,6 @@ def partition():
 
 
 @siteweb.route('/telech<int:part_id>gement', methods=['GET', 'POST'])
-@login_required
 def telecharger(part_id):   
    #Titre
    title='Partition de la messe | Choeur Pilote'
@@ -244,22 +253,35 @@ def telecharger(part_id):
 def actualite():
    title="Actualité | Choeur pilote"
 
-    #Triage selon les articles
+
+   #Triage selon les articles
    cat_id=Categorie.query.filter_by(nom='Article').first()
 
-   #Requet des pagination et des listage des données
-   page= request.args.get('page', 1, type=int)
-   pub_page=Article.query.filter_by(statut=True, categorie_id=cat_id.id).order_by(Article.id.asc()).paginate(page=page, per_page=5)
-
-   #Les partitions les precement mise en ligne
-   plus_telecharger=Partition.query.filter_by(statut=True).order_by(Partition.id.asc()).limit(10)
-
-   #Les partitions plus populaire
-   plus_artic=Article.query.filter(Article.nbr_lecture >=5).limit(5)
-
+   ver_post=None
+   plus_telecharger={}
+   pub_page={}
+   plus_artic={}
    nos_images=nosimage()
+
+   if cat_id is not None:
+      #Requet des pagination et des listage des données
+      page= request.args.get('page', 1, type=int)
+      pub_page=Article.query.filter_by(statut=True, categorie_id=cat_id.id).order_by(Article.id.asc()).paginate(page=page, per_page=5)
+
+      #Les partitions les precement mise en ligne
+      plus_telecharger=Partition.query.filter_by(statut=True).order_by(Partition.id.asc()).limit(10)
+
+      #Les partitions plus populaire
+      plus_artic=Article.query.filter(Article.nbr_lecture >=5).limit(5)
+      
+      ver_post="Novide"
+   else:
+      ver_post="Vide"
+      
+
+
    rec={'titre':'News', 'page':'Actualité'}
-   return render_template('siteweb/otherpage/actualite.html',plus_artic=plus_artic, rec=rec, title=title, plus_telecharger=plus_telecharger, nos_images=nos_images, liste=pub_page)
+   return render_template('siteweb/otherpage/actualite.html',plus_artic=plus_artic, ver_post=ver_post, rec=rec, title=title, plus_telecharger=plus_telecharger, nos_images=nos_images, liste=pub_page)
 
 
 
@@ -297,7 +319,6 @@ def postactualite(slug_id,post_id):
 def contact():
    title="Contactez - nous | Choeur pilote"
 
-  
    #Les partitions les precement mise en ligne
    plus_telecharger=Partition.query.filter_by(statut=True).order_by(Partition.id.asc()).limit(10)
    #Les partitions plus populaire

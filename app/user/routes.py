@@ -9,7 +9,7 @@ from . import user
 """ Ajout d'un nouveau user """
 
 @user.route('/ajouteruti', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def ajuser():
        
 
@@ -30,6 +30,26 @@ def ajuser():
       flash("Ajout d'un utilisateur avec succès",'success')
       return redirect(url_for('user.liuser')) 
    return render_template('user/ajuser.html', form=form)
+
+
+""" Ajout Administrateur """
+
+@user.route('/ajoutad', methods=['GET', 'POST'])
+def ajouteruserad():
+      
+   form=AjouteruserForm()
+   #ENregfistrement des operations
+   if form.validate_on_submit():
+      nom=form.nom.data.upper()
+      prenom=form.prenom.data.capitalize()
+      post_nom=form.post_nom.data.upper()
+      password_hash=bcrypt.generate_password_hash(form.password.data).decode('utf-8')   
+      utilisateur=User(nom=nom, prenom=prenom,post_nom=post_nom, password=password_hash, username=form.username.data,role=form.role.data, statut=True, compositeur=True)
+      db.session.add(utilisateur)
+      db.session.commit()
+      flash("Ajout de l'administrateur",'success')
+      return redirect(url_for('auth.login')) 
+   return render_template('user/ajuserad.html', form=form)
 
 
 """ Liste utilisateur """

@@ -63,7 +63,7 @@ def create_app(config_name):
     @app.errorhandler(500)
     def internal_server_error(error):
         rec={'titre':'Erreur 505', 'page':'Erreur serveur'}
-        return render_template('errors/500.html', title='Erreur serveur'), 500
+        return render_template('errors/500.html', title='Erreur serveur',rec=rec), 500
     
     
     from .main import main as main_blueprint

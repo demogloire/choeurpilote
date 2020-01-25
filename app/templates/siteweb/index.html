@@ -85,7 +85,7 @@
                         pouvant regrouper les chantres de cinq Paroisses de ce milieu, pour ne citer que ça 
                         (Cathédrale Saint Paul, Bon Berger de Kalundu, Saints Anges Gardiens de Nyamianda, 
                         Notre Dame aux larmes de Mulongwe et Sainte Marie Mère et Reine de Kavimvira; toutes 
-                        d’Uvira-Centre d’abord pour des raisons d’essai..
+                        d’Uvira-Centre d’abord pour des raisons d’essai.. 
                         <a href="#" class="button_hover theme_btn_one">Savoir plus</a>
                     </p>
                     
@@ -96,7 +96,7 @@
     </div>
 </section>
 
-<!============== Dernière publication sur le pilote ==============================>
+<!============== Dernière publication sur le pilote  ==============================>
 <section class="latest_blog_area section_gap">
     <div class="container">
         <div class="section_title text-center">
@@ -104,6 +104,7 @@
           </div>
           <br>
         <div class="row mb_30">
+            {%if ver_post == "Novide" %}
             {% for donnees in rec%}
             <div class="col-lg-4 col-md-6">
                 <div class="single-recent-blog-post">
@@ -128,6 +129,7 @@
                 </div>
             </div>
             {% endfor %}
+            {% endif %}
 
         </div>
     </div>
@@ -144,7 +146,7 @@
         
         
         <div class="testimonial_slider owl-carousel"> 
-
+        {%if ver_post == "Novide"%}
         {%for comm in recm %}
         <div class="media testimonial_item">
             <img class="rounded-circle" height="50px" width="50px" src=" {{ url_for('static', filename='logo/t.jpg')}} " alt="">
@@ -157,6 +159,7 @@
             </div>
         </div>
         {% endfor %}
+        {% endif %}
             
         </div>
     </div>

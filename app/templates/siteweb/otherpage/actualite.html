@@ -7,6 +7,8 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="blog_left_sidebar">
+                    {% if ver_post=="Novide" %}
+                    
                     {% for listes in liste.items %}
                     <a href="{{ url_for('siteweb.postactualite', slug_id=listes.slug,  post_id=listes.id)}}">
 
@@ -44,13 +46,13 @@
                          </article>
 
                     </a>
-                    
-                    
                     {% endfor %}
+                    {% endif %}
                     
                   
                     <nav class="blog-pagination justify-content-center d-flex">
                         <ul class="pagination">
+                            {% if ver_post=="Novide" %}
                             <li class="page-item">
                                 <a href="#" class="page-link" aria-label="Previous">
                                     <span aria-hidden="true">
@@ -58,6 +60,7 @@
                                     </span>
                                 </a>
                             </li>
+                            
                             {% for page_num in liste.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
                             {% if page_num %}
                                 {% if liste.page==page_num %}
@@ -79,6 +82,7 @@
                                     </span>
                                 </a>
                             </li>
+                            {% endif %}
                         </ul>
             </nav>                
                       
@@ -95,9 +99,11 @@
                         </div><!-- /input-group -->
                         <div class="br"></div>
                     </aside>
+                    {% if ver_post=="Novide" %}
                     {% include 'sidebar/sidebarpost.html' %}
 
                     {% include 'sidebar/sidebarrecent.html' %}
+                    {% endif %}
                     <br><br>
                     <aside class="single-sidebar-widget newsletter_widget">
                         <h4 class="widget_title">Newsletter</h4>
