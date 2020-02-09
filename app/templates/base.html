@@ -48,7 +48,7 @@
                     </div>
                     <ul class="nav">
                         
-                        {% if current_user.compositeur == True  and current_user.role=='Webmaster': %}
+                        {% if current_user.compositeur == True  and current_user.role=='Webmaster' %}
                             <li >
                                 <a href="{{ url_for('publication.lipub')}}">
                                     <i class="ti-receipt"></i>
@@ -61,14 +61,14 @@
                                     <p>Partition</p>
                                 </a>
                             </li>
-                        {% elif current_user.compositeur == True  and current_user.role=='Compositeur': %}
+                        {% elif current_user.compositeur == True  and current_user.role=='Compositeur' %}
                             <li>
                                 <a href="{{ url_for('partition.lipuart')}} ">
                                     <i class="ti-music-alt"></i>
                                     <p>Partition</p>
                                 </a>
                             </li>
-                        {% elif current_user.compositeur == True  and current_user.role=='Admin': %}
+                        {% elif current_user.compositeur == True  and current_user.role=='Admin'  %}
                             <li >
                                 <a href="{{ url_for('publication.lipub')}}">
                                     <i class="ti-receipt"></i>
