@@ -1,7 +1,7 @@
 from flask import render_template, flash, url_for, redirect, request, session
 from .. import db, bcrypt
 from ..models import User 
-from app.user.forms import AjouteruserForm, PassuserForm, EditeruserForm
+from app.user.forms import AjouteruserForm, PassuserForm, EditeruserForm, ProfilForm
 from flask_login import login_user, current_user, logout_user, login_required
 from . import user
 
@@ -55,8 +55,11 @@ def ajouteruserad():
 """ Liste utilisateur """
 
 @user.route('/listeuti', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def liuser():
+       
+   if current_user.role!='Admin':
+      return redirect(url_for('main.dashboard'))
    #Requête d'affichage des utlisateurs
    listes=User.query.order_by(User.id.desc())
 
@@ -66,7 +69,7 @@ def liuser():
 """ Modifier statut de l'Utilisateur """
 
 @user.route('/statutut/<int:user_id>', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def statutuser(user_id):
    #Titre
    title='Utilisateur | Choeur pilote'
@@ -98,7 +101,7 @@ def statutuser(user_id):
 
 """ Compositeur """
 @user.route('/compositeur/<int:user_id>', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def compositeur(user_id):
    #Titre
    title='Activation'
@@ -129,7 +132,7 @@ def compositeur(user_id):
 """ Modifier le mot de passé de l'utilisateur """
 
 @user.route('/motdepass/<int:user_id>', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def passuser(user_id):
    
   
@@ -161,7 +164,7 @@ def passuser(user_id):
 """ Modification des informations de l'utilisateur """
 
 @user.route('/editut_<int:user_id>', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def edituser(user_id):
        
    form=EditeruserForm()
@@ -177,7 +180,7 @@ def edituser(user_id):
       return redirect(url_for('user.liuser'))
    
    #La modification des informations de l'utilisateur.
-   if current_user.id is not user_pass.id or current_user.role !='Admin':
+   if current_user.role !='Admin':
       return redirect(url_for('main.dashboard'))
 
    if form.validate_on_submit():
@@ -207,3 +210,51 @@ def edituser(user_id):
       form.ed_username.data=user_pass.username
 
    return render_template('user/edituser.html', form=form, title=title, user_nom=user_nom)
+
+
+
+#Profil de l'utilisateur
+@user.route('/profil_<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def profil(user_id):
+       
+   form=ProfilForm()
+   
+   #Requête de vérification de l'utilisateur
+   user_pass=User.query.filter_by(id=user_id).first()
+   #Le nom de l'utilisateur en cours de modification
+   user_nom=user_pass.prenom
+   #Titre
+   title='Profil | {}'.format(user_nom)
+
+   if user_pass is None:
+      return redirect(url_for('user.liuser'))
+   
+   #La modification des informations de l'utilisateur.
+   if current_user.id is not user_pass.id:
+      return redirect(url_for('main.dashboard'))
+
+   if form.validate_on_submit():
+      if form.ed_username.data == user_pass.username:
+         user_pass.nom=form.ed_nom.data.upper()
+         user_pass.post_nom=form.ed_post_nom.data.upper()
+         user_pass.prenom=form.ed_prenom.data.capitalize()
+         db.session.commit()
+         flash("Modification réussie",'success')
+         return redirect(url_for('user.profil', user_id=user_id)) 
+      else:
+         user_pass.nom=form.ed_nom.data.upper()
+         user_pass.post_nom=form.ed_post_nom.data.upper()
+         user_pass.prenom=form.ed_prenom.data.capitalize()
+         user_pass.username=form.ed_username.data
+         db.session.commit()
+         flash("Modification réussie",'success')
+         return redirect(url_for('user.profil', user_id=user_id)) 
+   
+   if request.method=='GET':
+      form.ed_nom.data=user_pass.nom
+      form.ed_post_nom.data=user_pass.post_nom
+      form.ed_prenom.data=user_pass.prenom
+      form.ed_username.data=user_pass.username
+
+   return render_template('user/profil.html', form=form, title=title, user_nom=user_nom)

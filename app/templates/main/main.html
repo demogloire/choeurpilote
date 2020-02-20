@@ -3,7 +3,111 @@
 {% block body %}
 <div class="container-fluid">
     <div class="row">
-                    
-    </div>               
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-warning text-center">
+                                <i class="ti-receipt"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Publications</p>
+                                {{nbr_article}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+               
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-success text-center">
+                                <i class="ti-music-alt"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Partitions</p>
+                                {{nbr_part}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-danger text-center">
+                                <i class="ti-gallery"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Photos</p>
+                                {{ nbr_album}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-info text-center">
+                                <i class="ti-download"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Partitions téléchargées</p>
+                                {{sommes_telecharger_part}}
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="row">
+
+        <div class="col-md-12">
+            
+            <div class="card">
+                <b>Les articles non actifs</b>
+                <div class="content">
+                    {%if controle_actif=="Novide" %}
+                        <div class="content table-responsive table-full-width">
+                        <table class="table table-hover">
+                        {%for article in nombre_article_pu %}
+                            <tr>
+                                <td> {{article.titre}} </td>
+                                <td> Par {{article.user_article.prenom}} </td>
+                                <td>{{ article.date_pub.strftime('%d - %m - %Y') }}</td>
+                            </tr> 
+                        {% endfor %}
+                        </table>
+                        </div>
+                    {%else%}
+                        <b>Aucun article inactif sur la plateforme</b>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+
+    </div>            
 </div>
 {% endblock body %}

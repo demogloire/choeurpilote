@@ -59,10 +59,10 @@ def historique():
 
    return render_template('siteweb/apropos/historique.html',nos_images=nos_images, apropos=apropos, title=title, rec=qui_id)
 
-@siteweb.route('/prospectif.html', methods=['GET', 'POST'])
+@siteweb.route('/perspectives.html', methods=['GET', 'POST'])
 def prospectif():
    #Page
-   page='Prospectif'
+   page='Perspectives'
    #Triage selon les articles
    qui_id=Statpage.query.filter_by(titre=page).first_or_404()
    #Titre de la page
@@ -77,11 +77,12 @@ def prospectif():
 def comite():
    #Titre de la page
    title='Le comité du choeur'
-   rec=None
+   page='Comité du choeur'
+   qui_id=Statpage.query.filter_by(titre=page).first_or_404()
    #Apropos
    apropos='apropos'
    nos_images=nosimage()
-   return render_template('siteweb/apropos/comite.html', nos_images=nos_images, rec=rec, apropos=apropos, title=title)
+   return render_template('siteweb/apropos/comite.html', nos_images=nos_images, rec=qui_id, apropos=apropos, title=title)
 
 
 @siteweb.route('/agenda.html', methods=['GET', 'POST'])

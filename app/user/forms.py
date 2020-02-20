@@ -32,6 +32,13 @@ class EditeruserForm(FlaskForm):
     ed_role= SelectField('Rôle',choices=[('Admin', 'Admin'), ('Webmaster', 'Webmaster'), ('Compositeur', 'Compositeur')])
     ed_submit = SubmitField('Créer compte')
 
+class ProfilForm(FlaskForm):
+    ed_nom= StringField('Nom', validators=[DataRequired("Completer nom"),  Length(min=4, max=32, message="Veuillez respecté les caractères")])
+    ed_post_nom= StringField('Post-nom', validators=[DataRequired("Completer nom"),  Length(min=4, max=32, message="Veuillez respecté les caractères")])
+    ed_prenom= StringField('Prénom', validators=[DataRequired("Completer nom"),  Length(min=4, max=32, message="Veuillez respecté les caractères")])
+    ed_username= StringField('Email', validators=[DataRequired('Veuillez completer votre email'), Email('Votre email est incorrect')])
+    ed_submit = SubmitField('Créer compte')
+
 
 class PassuserForm(FlaskForm):
     password= PasswordField('Mot de passe', validators=[DataRequired('Veuillez completer votre mot de passe')])

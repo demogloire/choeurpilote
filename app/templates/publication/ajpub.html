@@ -1,10 +1,16 @@
 {% extends "base.html" %}
 
+{% block summurnote %}
+    <script src=" {{ url_for('static', filename='summnernote/jquer.js')}} "></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='summnernote/summernote-lite.css')}} ">
+    <script src="{{ url_for('static', filename='summnernote/summernote-lite.js')}}"></script>
+{% endblock  %}
+
 {% block body %}
 <div class="col-lg-12 col-md-12">
     <div class="card box-shadow--4dp">
         <div class="header">
-            <h4 class="title">Ajouter produit</h4>
+            <h4 class="title">Ajouter une publication</h4>
         </div>
         <div class="content">
                 {% with messages= get_flashed_messages(with_categories=true) %}
@@ -45,7 +51,7 @@
                             <div class="form-group">
                                     <label>Contenue</label>
                                     {% if form.resume.errors %}
-                                    {{ form.resume(rows="20", class="form-control border-input")}}
+                                    {{ form.resume(id="summernote")}}
                                     <i class="form-group__bar"></i>
                                     <div class="invalid-feedback">
                                         {% for error in form.resume.errors %}
@@ -53,7 +59,7 @@
                                         {% endfor %}
                                     </div>
                                     {% else %}
-                                    {{ form.resume(rows="20", class="form-control border-input")}}
+                                    {{ form.resume(id="summernote")}}
                                     <i class="form-group__bar"></i>
                                     {% endif %}
                             </div>

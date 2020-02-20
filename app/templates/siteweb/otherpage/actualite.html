@@ -38,8 +38,8 @@
                                      {% endif %}
                                      <div class="blog_details">
                                          <a href="{{ url_for('siteweb.postactualite', slug_id=listes.slug,  post_id=listes.id)}}"><h2> {{listes.titre}} </h2></a>
-                                         <p>{{ listes.resume | truncate(200)|markdown }} </p>
-                                         <a href="{{ url_for('siteweb.postactualite', slug_id=listes.slug, post_id=listes.id)}}" class="view_btn button_hover">Lire la suite</a>
+                                         
+                                         <a href="{{ url_for('siteweb.postactualite', slug_id=listes.slug, post_id=listes.id)}}" class="view_btn button_hover">Lire l'article</a>
                                      </div>
                                  </div>
                              </div>
