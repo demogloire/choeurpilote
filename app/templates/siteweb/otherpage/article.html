@@ -1,5 +1,7 @@
 {% extends "autrespage.html" %}
-
+{% block share %}
+    {{ share.load() }}
+{% endblock %} 
 {% block body %}
 <!--================Blog Area =================-->
  <!--================Blog Area =================-->
@@ -47,7 +49,8 @@
                                 <a target="blank" class="btn btn-danger" href=" {{ actualite.document_pdf }} "><i class="lnr lnr-download"></i> Télécharger le PDF</a>
                             </p>
                         {% endif %}
-                        
+
+                        {{ share.create(title='Partager sur: ') }}
                     </div>
 
 

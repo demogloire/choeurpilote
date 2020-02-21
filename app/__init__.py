@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 #from wtf_tinymce import wtf_tinymce
 from flask_simplemde import SimpleMDE
 from flaskext.markdown import Markdown
+from flask_share import Share
 
 #Importation des configuration de l'application sur le developpement de l'application
 from config import app_config
@@ -16,7 +17,7 @@ from config import app_config
 db = SQLAlchemy()
 login_manager = LoginManager()
 bcrypt = Bcrypt()
-
+share = Share()
 #Structure de l'application
 
 def create_app(config_name):
@@ -36,7 +37,7 @@ def create_app(config_name):
     Markdown(app)
     migrate = Migrate(app, db)
     #wtf_tinymce.init_app(app)
-    
+    share.init_app(app)
 
     login_manager.login_message = "Veuillez vous connecté"
     login_manager.login_view = "auth.login"

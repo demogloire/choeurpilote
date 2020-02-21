@@ -21,6 +21,9 @@
         <!-- main css -->
         <link rel="stylesheet" href="{{ url_for('static',filename='site/css/style.css')}} ">
         <link rel="stylesheet" href="{{ url_for('static',filename='site/css/responsive.css')}} ">
+        
+        {% block share %}{% endblock %} 
+   
     </head>
     <body>
       
