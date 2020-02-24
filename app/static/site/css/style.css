@@ -501,7 +501,7 @@ button:focus {
 
 .banner_area .bg-parallax {
   background: url("../image/bn.jpg") no-repeat scroll center 0/cover;
-  opacity: 0.80;
+  /* opacity: 0.80; */
 }
 
 .banner_area .position {
