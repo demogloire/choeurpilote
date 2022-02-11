@@ -32,7 +32,7 @@ mysql-connector-python==8.0.18
 packaging==19.2
 Pillow==6.2.1
 pluggy==0.13.1
-protobuf==3.11.2
+protobuf==3.15.0
 pur==5.3.0
 py==1.8.0
 pycparser==2.19
